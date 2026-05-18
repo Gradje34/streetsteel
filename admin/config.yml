@@ -1,16 +1,13 @@
 # StreetSteel CMS Configuratie
 # Beheerpaneel voor streetsteel.com
 # =============================================
-
 backend:
   name: git-gateway
   branch: main
 
-# Mediabestanden (foto's) worden hier opgeslagen
 media_folder: "fotos"
 public_folder: "/fotos"
 
-# Taal van het beheerpaneel
 locale: nl
 
 # =============================================
