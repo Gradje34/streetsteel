@@ -1,6 +1,7 @@
 /**
  * StreetSteel — Foto Loader
  * Laadt foto's automatisch via JSON data bestanden
+ * Werkt met én zonder .html in de URL
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,24 +10,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const empty = document.getElementById("galleryEmpty");
     if (!grid) return;
 
-    // Bepaal welk JSON bestand we nodig hebben op basis van het URL pad
-    const pad = window.location.pathname;
+    // Verwijder .html uit het pad zodat het altijd hetzelfde werkt
+    const pad = window.location.pathname.replace(/\.html$/, "");
     let jsonPad = null;
 
-    // nederland/groningen.html → /data/nederland/groningen.json
-    const nlMatch = pad.match(/\/nederland\/([^.]+)\.html/);
+    // /nederland/groningen → /data/nederland/groningen.json
+    const nlMatch = pad.match(/\/nederland\/([^/]+)$/);
     if (nlMatch) jsonPad = `/data/nederland/${nlMatch[1]}.json`;
 
-    // europa/noorwegen/oslo.html → /data/europa/noorwegen/oslo.json
-    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^.]+)\.html/);
+    // /europa/noorwegen/oslo → /data/europa/noorwegen/oslo.json
+    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^/]+)$/);
     if (euStadMatch) jsonPad = `/data/europa/${euStadMatch[1]}/${euStadMatch[2]}.json`;
 
-    // europa/noorwegen.html → /data/europa/noorwegen.json
-    const euLandMatch = pad.match(/\/europa\/([^/]+)\.html/);
+    // /europa/noorwegen → /data/europa/noorwegen.json
+    const euLandMatch = pad.match(/\/europa\/([^/]+)$/);
     if (euLandMatch && !euStadMatch) jsonPad = `/data/europa/${euLandMatch[1]}.json`;
 
-    // fabrikanten/wavin.html → /data/fabrikanten/wavin.json
-    const fabMatch = pad.match(/\/fabrikanten\/([^.]+)\.html/);
+    // /fabrikanten/wavin → /data/fabrikanten/wavin.json
+    const fabMatch = pad.match(/\/fabrikanten\/([^/]+)$/);
     if (fabMatch) jsonPad = `/data/fabrikanten/${fabMatch[1]}.json`;
 
     if (!jsonPad) return;
