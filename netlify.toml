@@ -1,11 +1,331 @@
 [build]
   publish = "."
 
+# Redirects voor Nederland steden
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/nederland/amsterdam"
+  to = "/nederland/amsterdam.html"
   status = 200
 
+[[redirects]]
+  from = "/nederland/apeldoorn"
+  to = "/nederland/apeldoorn.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/delfzijl"
+  to = "/nederland/delfzijl.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/eindhoven"
+  to = "/nederland/eindhoven.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/emmen"
+  to = "/nederland/emmen.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/groningen"
+  to = "/nederland/groningen.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/harderwijk"
+  to = "/nederland/harderwijk.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/helmond"
+  to = "/nederland/helmond.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/hoogezand"
+  to = "/nederland/hoogezand.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/lelystad"
+  to = "/nederland/lelystad.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/veendam"
+  to = "/nederland/veendam.html"
+  status = 200
+
+[[redirects]]
+  from = "/nederland/winschoten"
+  to = "/nederland/winschoten.html"
+  status = 200
+
+# Redirects voor Europa landen
+[[redirects]]
+  from = "/europa/denemarken"
+  to = "/europa/denemarken.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland"
+  to = "/europa/duitsland.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/frankrijk"
+  to = "/europa/frankrijk.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/hongarije"
+  to = "/europa/hongarije.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/italie"
+  to = "/europa/italie.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/kosovo"
+  to = "/europa/kosovo.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/kroatie"
+  to = "/europa/kroatie.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/macedonie"
+  to = "/europa/macedonie.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen"
+  to = "/europa/noorwegen.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/oostenrijk"
+  to = "/europa/oostenrijk.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/portugal"
+  to = "/europa/portugal.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/schotland"
+  to = "/europa/schotland.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/slowakije"
+  to = "/europa/slowakije.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/spanje"
+  to = "/europa/spanje.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/zweden"
+  to = "/europa/zweden.html"
+  status = 200
+
+# Redirects voor Europa steden
+[[redirects]]
+  from = "/europa/denemarken/korsor"
+  to = "/europa/denemarken/korsor.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/bad-neuenahr-ahrweiler"
+  to = "/europa/duitsland/bad-neuenahr-ahrweiler.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/berlijn"
+  to = "/europa/duitsland/berlijn.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/hohn"
+  to = "/europa/duitsland/hohn.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/hohenschwangau"
+  to = "/europa/duitsland/hohenschwangau.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/kavelaer"
+  to = "/europa/duitsland/kavelaer.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/kiel"
+  to = "/europa/duitsland/kiel.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/kornau"
+  to = "/europa/duitsland/kornau.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/leer"
+  to = "/europa/duitsland/leer.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/oberhausen"
+  to = "/europa/duitsland/oberhausen.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/oldenburg"
+  to = "/europa/duitsland/oldenburg.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/duitsland/riezlern"
+  to = "/europa/duitsland/riezlern.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/hongarije/boedapest"
+  to = "/europa/hongarije/boedapest.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/italie/como"
+  to = "/europa/italie/como.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/italie/sicilie"
+  to = "/europa/italie/sicilie.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/bearums-verk"
+  to = "/europa/noorwegen/bearums-verk.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/bergen"
+  to = "/europa/noorwegen/bergen.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/flaam"
+  to = "/europa/noorwegen/flaam.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/honningsvaag"
+  to = "/europa/noorwegen/honningsvaag.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/kristiansand"
+  to = "/europa/noorwegen/kristiansand.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/molde"
+  to = "/europa/noorwegen/molde.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/olden"
+  to = "/europa/noorwegen/olden.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/oslo"
+  to = "/europa/noorwegen/oslo.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/stavanger"
+  to = "/europa/noorwegen/stavanger.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/noorwegen/tromsoe"
+  to = "/europa/noorwegen/tromsoe.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/slowakije/bratislava"
+  to = "/europa/slowakije/bratislava.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/spanje/cordoba"
+  to = "/europa/spanje/cordoba.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/spanje/granada"
+  to = "/europa/spanje/granada.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/spanje/nerja"
+  to = "/europa/spanje/nerja.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/spanje/udeba"
+  to = "/europa/spanje/udeba.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/zweden/goeteborg"
+  to = "/europa/zweden/goeteborg.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/zweden/malmoe"
+  to = "/europa/zweden/malmoe.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa/zweden/nordby"
+  to = "/europa/zweden/nordby.html"
+  status = 200
+
+# Redirects voor hoofdpagina's
+[[redirects]]
+  from = "/nederland"
+  to = "/nederland.html"
+  status = 200
+
+[[redirects]]
+  from = "/europa"
+  to = "/europa.html"
+  status = 200
+
+[[redirects]]
+  from = "/fabrikanten"
+  to = "/fabrikanten.html"
+  status = 200
+
+[[redirects]]
+  from = "/over"
+  to = "/over.html"
+  status = 200
+
+# Headers
 [[headers]]
   for = "/*"
   [headers.values]
