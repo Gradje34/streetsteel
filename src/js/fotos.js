@@ -1,17 +1,15 @@
 /**
  * StreetSteel — Foto Loader
  * Laadt foto's automatisch via JSON data bestanden
- * Werkt met én zonder .html in de URL
  */
 
-document.addEventListener("DOMContentLoaded", () => {
-
+function laadFotos() {
     const grid  = document.getElementById("galleryGrid");
     const empty = document.getElementById("galleryEmpty");
     if (!grid) return;
 
-    // Verwijder .html uit het pad zodat het altijd hetzelfde werkt
-    const pad = window.location.pathname.replace(/\.html$/, "");
+    // Verwijder .html en trailing slash uit het pad
+    const pad = window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "");
     let jsonPad = null;
 
     // /nederland/groningen → /data/nederland/groningen.json
@@ -32,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!jsonPad) return;
 
-    // Laad de JSON data
     fetch(jsonPad)
         .then(r => {
             if (!r.ok) throw new Error("Geen data");
@@ -52,32 +49,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 const item = document.createElement("div");
                 item.className = "gallery-item";
                 item.innerHTML = `
-                    <img data-src="${fotoUrl}"
-                         src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                    <img src="${fotoUrl}"
                          alt="Putdeksel"
-                         loading="lazy">
+                         loading="lazy"
+                         style="width:100%;height:100%;object-fit:cover;">
                     <div class="gallery-item-overlay"></div>
                 `;
                 grid.appendChild(item);
             });
 
-            // Initialiseer lazy loading en lightbox
-            if (typeof initLazyLoad === "function") initLazyLoad();
-            if (typeof initLightbox  === "function") initLightbox();
-            if (typeof initPhotoCounts === "function") initPhotoCounts();
-
-            // Update de fototeller bovenaan de pagina
+            // Update fototeller
             const teller = document.querySelector(".photo-count-live");
             if (teller) {
                 const aantal = fotos.length;
                 teller.textContent = aantal === 1 ? `1 foto` : `${aantal} foto's`;
             }
+
+            // Lightbox
+            if (typeof initLightbox === "function") initLightbox();
         })
         .catch(() => {
             if (empty) empty.textContent = "Foto's worden binnenkort toegevoegd.";
         });
 
-    // Laad ook de tellers voor overzichtspagina's
+    // Tellers voor overzichtspagina's
     const tellerEls = document.querySelectorAll(".photo-count[data-page]");
     if (tellerEls.length > 0) {
         fetch("/data/tellers.json")
@@ -91,4 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(() => {});
     }
-});
+}
+
+// Direct uitvoeren — script staat onderaan de pagina dus DOM is al klaar
+laadFotos();
