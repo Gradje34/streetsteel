@@ -1,0 +1,30 @@
+﻿===== STREETSTEEL MIGRATIE RAPPORT =====
+Gegenereerd op: 20-05-2026 19:53
+
+--- GIT ---
+Git NIET gevonden!
+
+--- NODE.JS ---
+Node.js NIET gevonden!
+
+--- GLOBALE NPM PACKAGES ---
+(geen of fout)
+
+--- NETLIFY CLI ---
+Netlify CLI NIET gevonden
+
+--- VS CODE ---
+VS Code NIET gevonden of niet in PATH
+
+--- STREETSTEEL PROJECT ---
+Projectmap gevonden: M:\Streetsteel.com
+Geen git remote gevonden
+
+.env bestanden (INHOUD NIET gelogd - kopieer handmatig):
+
+===== ACTIES VOOR 16 JUNI =====
+[ ] Git push gedaan vanuit projectmap
+[ ] .env bestand(en) veilig opgeslagen
+[ ] Dit rapport opgeslagen
+[ ] vscode-extensies.txt opgeslagen
+
