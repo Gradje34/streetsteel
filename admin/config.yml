@@ -1,0 +1,269 @@
+# StreetSteel CMS Configuratie
+# Beheerpaneel voor streetsteel.com
+# =============================================
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "fotos"
+public_folder: "/fotos"
+
+locale: nl
+
+# =============================================
+# COLLECTIES
+# =============================================
+
+collections:
+
+  # ── LOCATIES: NEDERLAND ──────────────────────────────────────
+  - name: "nederland"
+    label: "🇳🇱 Nederland — Steden"
+    label_singular: "Stad"
+    folder: "_data/nederland"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    editor:
+      preview: false
+    fields:
+      - label: "Stadsnaam"
+        name: "titel"
+        widget: "string"
+        hint: "Bijv. Groningen"
+
+      - label: "URL-naam"
+        name: "slug"
+        widget: "string"
+        hint: "Bijv. groningen (kleine letters, geen spaties)"
+
+      - label: "Omschrijving (NL)"
+        name: "beschrijving_nl"
+        widget: "text"
+        required: false
+        hint: "Korte tekst over de stad, zichtbaar op de pagina"
+
+      - label: "Omschrijving (EN)"
+        name: "beschrijving_en"
+        widget: "text"
+        required: false
+
+      - label: "Foto's"
+        name: "fotos"
+        widget: "list"
+        label_singular: "Foto"
+        hint: "Upload hier alle foto's voor deze stad"
+        fields:
+          - label: "Afbeelding"
+            name: "afbeelding"
+            widget: "image"
+            hint: "Upload een foto (JPG of PNG)"
+            media_folder: "/fotos/nederland/{{fields.slug}}"
+            public_folder: "/fotos/nederland/{{fields.slug}}"
+
+          - label: "Bijschrift (optioneel)"
+            name: "bijschrift"
+            widget: "string"
+            required: false
+            hint: "Bijv. 'Wavin putdeksel, Grote Markt'"
+
+          - label: "Fabrikant (optioneel)"
+            name: "fabrikant"
+            widget: "relation"
+            collection: "fabrikanten"
+            search_fields: ["naam"]
+            value_field: "slug"
+            display_fields: ["naam"]
+            required: false
+            hint: "Koppel deze foto aan een fabrikant"
+
+  # ── LOCATIES: EUROPA ─────────────────────────────────────────
+  - name: "europa"
+    label: "🌍 Europa — Landen & Steden"
+    label_singular: "Locatie"
+    folder: "_data/europa"
+    create: true
+    slug: "{{land}}-{{slug}}"
+    extension: "json"
+    format: "json"
+    editor:
+      preview: false
+    fields:
+      - label: "Land"
+        name: "land"
+        widget: "select"
+        hint: "Selecteer het land"
+        options:
+          - { label: "Denemarken 🇩🇰", value: "denemarken" }
+          - { label: "Duitsland 🇩🇪",  value: "duitsland" }
+          - { label: "Frankrijk 🇫🇷",   value: "frankrijk" }
+          - { label: "Hongarije 🇭🇺",   value: "hongarije" }
+          - { label: "Italië 🇮🇹",      value: "italie" }
+          - { label: "Kosovo 🇽🇰",      value: "kosovo" }
+          - { label: "Kroatië 🇭🇷",     value: "kroatie" }
+          - { label: "Macedonië 🇲🇰",   value: "macedonie" }
+          - { label: "Noorwegen 🇳🇴",   value: "noorwegen" }
+          - { label: "Oostenrijk 🇦🇹",  value: "oostenrijk" }
+          - { label: "Portugal 🇵🇹",    value: "portugal" }
+          - { label: "Schotland 🏴󠁧󠁢󠁳󠁣󠁴󠁿",   value: "schotland" }
+          - { label: "Slowakije 🇸🇰",   value: "slowakije" }
+          - { label: "Spanje 🇪🇸",      value: "spanje" }
+          - { label: "Zweden 🇸🇪",      value: "zweden" }
+
+      - label: "Stadsnaam (of landnaam als geen stad)"
+        name: "titel"
+        widget: "string"
+        hint: "Bijv. Oslo, Bergen, of laat leeg als het alleen het land is"
+
+      - label: "URL-naam"
+        name: "slug"
+        widget: "string"
+        hint: "Bijv. oslo (kleine letters, geen spaties)"
+
+      - label: "Omschrijving (NL)"
+        name: "beschrijving_nl"
+        widget: "text"
+        required: false
+
+      - label: "Omschrijving (EN)"
+        name: "beschrijving_en"
+        widget: "text"
+        required: false
+
+      - label: "Foto's"
+        name: "fotos"
+        widget: "list"
+        label_singular: "Foto"
+        fields:
+          - label: "Afbeelding"
+            name: "afbeelding"
+            widget: "image"
+            media_folder: "/fotos/europa/{{fields.land}}/{{fields.slug}}"
+            public_folder: "/fotos/europa/{{fields.land}}/{{fields.slug}}"
+
+          - label: "Bijschrift (optioneel)"
+            name: "bijschrift"
+            widget: "string"
+            required: false
+
+          - label: "Fabrikant (optioneel)"
+            name: "fabrikant"
+            widget: "relation"
+            collection: "fabrikanten"
+            search_fields: ["naam"]
+            value_field: "slug"
+            display_fields: ["naam"]
+            required: false
+
+  # ── FABRIKANTEN ───────────────────────────────────────────────
+  - name: "fabrikanten"
+    label: "🏭 Fabrikanten"
+    label_singular: "Fabrikant"
+    folder: "_data/fabrikanten"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    format: "json"
+    editor:
+      preview: false
+    summary: "{{naam}}"
+    fields:
+      - label: "Naam fabrikant"
+        name: "naam"
+        widget: "string"
+        hint: "Bijv. Wavin"
+
+      - label: "URL-naam"
+        name: "slug"
+        widget: "string"
+        hint: "Bijv. wavin (kleine letters, geen spaties)"
+
+      - label: "Website"
+        name: "website"
+        widget: "string"
+        required: false
+        hint: "Bijv. https://www.wavin.com"
+
+      - label: "Land van herkomst"
+        name: "land"
+        widget: "string"
+        required: false
+        hint: "Bijv. Nederland"
+
+      - label: "Introductietekst (NL)"
+        name: "introductie_nl"
+        widget: "text"
+        hint: "Korte introductie van de fabrikant (wordt door AI gegenereerd, jij controleert)"
+
+      - label: "Introductietekst (EN)"
+        name: "introductie_en"
+        widget: "text"
+        required: false
+        hint: "Engelse vertaling van de introductie"
+
+      - label: "Foto's"
+        name: "fotos"
+        widget: "list"
+        label_singular: "Foto"
+        hint: "Foto's van putdeksels van deze fabrikant"
+        fields:
+          - label: "Afbeelding"
+            name: "afbeelding"
+            widget: "image"
+            media_folder: "/fotos/fabrikanten/{{fields.slug}}"
+            public_folder: "/fotos/fabrikanten/{{fields.slug}}"
+
+          - label: "Bijschrift (optioneel)"
+            name: "bijschrift"
+            widget: "string"
+            required: false
+
+          - label: "Locatie (optioneel)"
+            name: "locatie"
+            widget: "string"
+            required: false
+            hint: "Bijv. Groningen, Nederland"
+
+  # ── SITE-INSTELLINGEN ─────────────────────────────────────────
+  - name: "instellingen"
+    label: "⚙️ Site-instellingen"
+    files:
+
+      - label: "Algemene instellingen"
+        name: "algemeen"
+        file: "_data/instellingen/algemeen.json"
+        editor:
+          preview: false
+        fields:
+          - label: "Sitenaam"
+            name: "sitenaam"
+            widget: "string"
+            default: "StreetSteel"
+
+          - label: "PayPal link"
+            name: "paypal_link"
+            widget: "string"
+            hint: "Bijv. https://paypal.me/gradje340"
+
+          - label: "Ko-fi link"
+            name: "kofi_link"
+            widget: "string"
+            required: false
+            hint: "Bijv. https://ko-fi.com/jouwpagina"
+
+          - label: "Google AdSense code"
+            name: "adsense_code"
+            widget: "string"
+            required: false
+            hint: "Je AdSense publisher ID, bijv. ca-pub-1234567890"
+
+          - label: "Over de maker (NL)"
+            name: "over_nl"
+            widget: "text"
+            hint: "Tekst voor de 'Over mij' pagina"
+
+          - label: "Over de maker (EN)"
+            name: "over_en"
+            widget: "text"
+            required: false

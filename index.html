@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreetSteel — Putdeksels van de wereld</title>
+    <meta name="description" content="Een fotografische verzameling van putdeksels en straatkolken uit Nederland en Europa. Per stad, per land, per fabrikant.">
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="header-inner">
+        <div class="logo">
+            <span class="logo-icon">⬡</span>
+            <div class="logo-text">
+                <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
+                <span class="logo-sub">.COM</span>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link active">Home</a>
+            <div class="nav-dropdown">
+                <a href="nederland.html" class="nav-link">Nederland</a>
+                <div class="dropdown-menu">
+                    <a href="nederland/amsterdam.html">Amsterdam</a>
+                    <a href="nederland/apeldoorn.html">Apeldoorn</a>
+                    <a href="nederland/delfzijl.html">Delfzijl</a>
+                    <a href="nederland/eindhoven.html">Eindhoven</a>
+                    <a href="nederland/emmen.html">Emmen</a>
+                    <a href="nederland/groningen.html">Groningen</a>
+                    <a href="nederland/harderwijk.html">Harderwijk</a>
+                    <a href="nederland/helmond.html">Helmond</a>
+                    <a href="nederland/hoogezand.html">Hoogezand</a>
+                    <a href="nederland/lelystad.html">Lelystad</a>
+                    <a href="nederland/veendam.html">Veendam</a>
+                    <a href="nederland/winschoten.html">Winschoten</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <a href="europa.html" class="nav-link">Europa</a>
+                <div class="dropdown-menu">
+                    <a href="europa/denemarken.html">Denemarken</a>
+                    <a href="europa/duitsland.html">Duitsland</a>
+                    <a href="europa/frankrijk.html">Frankrijk</a>
+                    <a href="europa/hongarije.html">Hongarije</a>
+                    <a href="europa/italie.html">Italië</a>
+                    <a href="europa/kosovo.html">Kosovo</a>
+                    <a href="europa/kroatie.html">Kroatië</a>
+                    <a href="europa/macedonie.html">Macedonië</a>
+                    <a href="europa/noorwegen.html">Noorwegen</a>
+                    <a href="europa/oostenrijk.html">Oostenrijk</a>
+                    <a href="europa/portugal.html">Portugal</a>
+                    <a href="europa/schotland.html">Schotland</a>
+                    <a href="europa/slowakije.html">Slowakije</a>
+                    <a href="europa/spanje.html">Spanje</a>
+                    <a href="europa/zweden.html">Zweden</a>
+                </div>
+            </div>
+            <div class="nav-dropdown">
+                <a href="fabrikanten.html" class="nav-link">Fabrikanten</a>
+                <div class="dropdown-menu dropdown-menu--wide">
+                    <a href="fabrikanten/wavin.html">Wavin</a>
+                    <a href="fabrikanten/dyka.html">Dyka</a>
+                    <a href="fabrikanten/avk.html">AVK</a>
+                    <a href="fabrikanten/hauraton.html">Hauraton</a>
+                    <a href="fabrikanten/pam.html">PAM</a>
+                    <a href="fabrikanten.html"><em>Alle fabrikanten →</em></a>
+                </div>
+            </div>
+            <a href="over.html" class="nav-link">Over</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="lang-switcher" id="langSwitcher">
+                <button class="lang-btn active" data-lang="nl">NL</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- MOBIEL MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-nav">
+        <a href="index.html">Home</a>
+        <a href="nederland.html">Nederland</a>
+        <a href="europa.html">Europa</a>
+        <a href="fabrikanten.html">Fabrikanten</a>
+        <a href="over.html">Over</a>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-content">
+        <p class="hero-label" data-i18n="hero.label">WE LOPEN ER ACHTELOOS OVERHEEN</p>
+        <h1 class="hero-title">
+            <span data-i18n="hero.title1">PUTDEKSELS</span><br>
+            <span class="hero-title--accent" data-i18n="hero.title2">VAN DE WERELD</span>
+        </h1>
+        <p class="hero-desc" data-i18n="hero.desc">
+            Ze lijken allemaal op elkaar — totdat je beter kijkt.<br>
+            Een fotografische verzameling van straatkolken en putdeksels<br>
+            uit Nederland en Europa.
+        </p>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-num">1200+</span>
+                <span class="stat-label" data-i18n="hero.stat1">Foto's</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">60+</span>
+                <span class="stat-label" data-i18n="hero.stat2">Fabrikanten</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">15+</span>
+                <span class="stat-label" data-i18n="hero.stat3">Landen</span>
+            </div>
+        </div>
+        <div class="hero-cta">
+            <a href="nederland.html" class="btn btn--primary" data-i18n="hero.cta1">Verken Nederland</a>
+            <a href="fabrikanten.html" class="btn btn--ghost" data-i18n="hero.cta2">Bekijk Fabrikanten</a>
+        </div>
+    </div>
+    <div class="hero-scroll-hint">
+        <span>scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- UITGELICHT: STEDEN -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag" data-i18n="section.locations">LOCATIES</span>
+            <h2 class="section-title" data-i18n="section.locations.title">Per stad & land</h2>
+            <p class="section-desc" data-i18n="section.locations.desc">Bekijk putdeksels per locatie — van Groningen tot Oslo, van Veendam tot Berlijn.</p>
+        </div>
+
+        <div class="cards-grid">
+            <a href="nederland/groningen.html" class="location-card">
+                <div class="card-img-placeholder">
+                    <span class="card-flag">🇳🇱</span>
+                </div>
+                <div class="card-body">
+                    <span class="card-country" data-i18n="country.nl">Nederland</span>
+                    <h3 class="card-city">Groningen</h3>
+                    <span class="card-count photo-count" data-page="nederland/groningen"></span>
+                </div>
+            </a>
+            <a href="europa/noorwegen/oslo.html" class="location-card">
+                <div class="card-img-placeholder">
+                    <span class="card-flag">🇳🇴</span>
+                </div>
+                <div class="card-body">
+                    <span class="card-country" data-i18n="country.no">Noorwegen</span>
+                    <h3 class="card-city">Oslo</h3>
+                    <span class="card-count photo-count" data-page="europa/noorwegen/oslo"></span>
+                </div>
+            </a>
+            <a href="europa/duitsland/berlijn.html" class="location-card">
+                <div class="card-img-placeholder">
+                    <span class="card-flag">🇩🇪</span>
+                </div>
+                <div class="card-body">
+                    <span class="card-country" data-i18n="country.de">Duitsland</span>
+                    <h3 class="card-city">Berlijn</h3>
+                    <span class="card-count photo-count" data-page="europa/duitsland/berlijn"></span>
+                </div>
+            </a>
+            <a href="nederland/veendam.html" class="location-card">
+                <div class="card-img-placeholder">
+                    <span class="card-flag">🇳🇱</span>
+                </div>
+                <div class="card-body">
+                    <span class="card-country" data-i18n="country.nl">Nederland</span>
+                    <h3 class="card-city">Veendam</h3>
+                    <span class="card-count photo-count" data-page="nederland/veendam"></span>
+                </div>
+            </a>
+            <a href="europa/noorwegen/bergen.html" class="location-card">
+                <div class="card-img-placeholder">
+                    <span class="card-flag">🇳🇴</span>
+                </div>
+                <div class="card-body">
+                    <span class="card-country" data-i18n="country.no">Noorwegen</span>
+                    <h3 class="card-city">Bergen</h3>
+                    <span class="card-count photo-count" data-page="europa/noorwegen/bergen"></span>
+                </div>
+            </a>
+            <a href="europa.html" class="location-card location-card--more">
+                <div class="card-more-inner">
+                    <span class="card-more-icon">→</span>
+                    <span data-i18n="section.all.locations">Alle locaties bekijken</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- UITGELICHT: FABRIKANTEN -->
+<section class="section section--dark">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag" data-i18n="section.manufacturers">FABRIKANTEN</span>
+            <h2 class="section-title" data-i18n="section.manufacturers.title">60+ producenten</h2>
+            <p class="section-desc" data-i18n="section.manufacturers.desc">Van Wavin tot Dyka, van Hauraton tot PAM — ontdek de makers achter het straatbeeld.</p>
+        </div>
+
+        <div class="manufacturer-list">
+            <a href="fabrikanten/wavin.html" class="manufacturer-item">
+                <span class="manufacturer-name">Wavin</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten/dyka.html" class="manufacturer-item">
+                <span class="manufacturer-name">Dyka</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten/avk.html" class="manufacturer-item">
+                <span class="manufacturer-name">AVK</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten/hauraton.html" class="manufacturer-item">
+                <span class="manufacturer-name">Hauraton</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten/pam.html" class="manufacturer-item">
+                <span class="manufacturer-name">PAM</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten/pipelife.html" class="manufacturer-item">
+                <span class="manufacturer-name">Pipelife</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten/landustrie.html" class="manufacturer-item">
+                <span class="manufacturer-name">Landustrie</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten/kessel.html" class="manufacturer-item">
+                <span class="manufacturer-name">Kessel</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+            <a href="fabrikanten.html" class="manufacturer-item manufacturer-item--all">
+                <span class="manufacturer-name" data-i18n="section.all.manufacturers">Alle fabrikanten</span>
+                <span class="manufacturer-arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- OVER GERARD -->
+<section class="section">
+    <div class="container">
+        <div class="about-strip">
+            <div class="about-text">
+                <span class="section-tag" data-i18n="section.about">OVER DE MAKER</span>
+                <h2 class="section-title" data-i18n="about.title">Gerard uit Veendam</h2>
+                <p data-i18n="about.desc">
+                    Als voormalig medewerker in de infrastractuur zag ik ze jarenlang zonder er bij na te denken. 
+                    Totdat ik begon te kijken. Elk putdeksel vertelt een verhaal — over de fabrikant, 
+                    het tijdperk, de gemeente. Deze site is mijn verzameling van dat verhaal, 
+                    vastgelegd in meer dan 1200 foto's uit heel Europa.
+                </p>
+                <a href="over.html" class="btn btn--ghost" data-i18n="about.more">Meer over dit project</a>
+            </div>
+            <div class="about-support">
+                <div class="support-card">
+                    <span class="support-icon">♥</span>
+                    <h3 data-i18n="support.title">Steun dit project</h3>
+                    <p data-i18n="support.desc">Vind je dit een leuk initiatief? Een kleine bijdrage helpt om de site online te houden en uit te breiden.</p>
+                    <a href="https://paypal.me/gradje340" target="_blank" rel="noopener" class="btn btn--paypal">
+                        <span>PayPal donatie</span>
+                    </a>
+                    <a href="https://ko-fi.com" target="_blank" rel="noopener" class="btn btn--kofi">
+                        <span>☕ Ko-fi</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon">⬡</span>
+                    <div class="logo-text">
+                        <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
+                    </div>
+                </div>
+                <p data-i18n="footer.tagline">Putdeksels van de wereld — vastgelegd door Gerard uit Veendam.</p>
+                <div class="footer-support">
+                    <a href="https://paypal.me/gradje340" target="_blank" rel="noopener" class="btn btn--paypal btn--sm">
+                        ♥ PayPal donatie
+                    </a>
+                </div>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footer.nav.locations">Locaties</h4>
+                <a href="nederland.html" data-i18n="country.nl">Nederland</a>
+                <a href="europa.html" data-i18n="nav.europe">Europa</a>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footer.nav.manufacturers">Fabrikanten</h4>
+                <a href="fabrikanten.html" data-i18n="footer.all.manufacturers">Alle fabrikanten A-Z</a>
+            </div>
+            <div class="footer-nav">
+                <h4 data-i18n="footer.nav.more">Meer</h4>
+                <a href="over.html" data-i18n="nav.about">Over dit project</a>
+                <a href="https://paypal.me/gradje340" target="_blank" data-i18n="nav.support">Steun de maker</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2021–2026 StreetSteel.com — Gerard Heijkamp</p>
+            <p data-i18n="footer.rights">Alle foto's zijn eigendom van de maker.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- PAYPAL STEUN KNOP (vast onderaan) -->
+<div class="floating-support" id="floatingSupport">
+    <a href="https://paypal.me/gradje340" target="_blank" rel="noopener" class="floating-support__btn" title="Steun dit project via PayPal">
+        ♥ <span data-i18n="support.floating">Steun</span>
+    </a>
+</div>
+
+<script src="src/js/i18n.js"></script>
+<script src="src/js/main.js"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+</body>
+</html>
