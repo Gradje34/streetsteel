@@ -95,12 +95,13 @@ LANDEN = {
 
 
 def maak_steden_kaarten(land, info):
-    """Maak kaarten voor steden of een bericht als er geen steden zijn."""
+    """Maak kaarten voor steden, of een fotogalerij als er geen steden zijn."""
     if not info["steden"]:
-        return f'''
-        <div style="text-align:center;padding:80px 0;color:#555;
-                    font-family:'Barlow Condensed',sans-serif;
-                    font-size:18px;letter-spacing:0.1em;text-transform:uppercase;">
+        return '''
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="gallery-empty" id="galleryEmpty" style="text-align:center;padding:80px 0;
+             color:#555;font-family:Barlow Condensed,sans-serif;
+             font-size:18px;letter-spacing:0.1em;text-transform:uppercase;">
             Foto's worden binnenkort toegevoegd.
         </div>'''
 
