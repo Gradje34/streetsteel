@@ -107,7 +107,7 @@ def maak_steden_kaarten(land, info):
     kaarten = ""
     for slug, naam in info["steden"]:
         kaarten += f'''
-            <a href="{slug}.html" class="location-card">
+            <a href="/europa/{land}/{slug}.html" class="location-card">
                 <div class="card-img-placeholder">
                     <span class="card-flag">{info["vlag"]}</span>
                 </div>
