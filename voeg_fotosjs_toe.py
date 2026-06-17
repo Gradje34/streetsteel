@@ -10,7 +10,7 @@ Gebruik: python voeg_fotosjs_toe.py
 from pathlib import Path
 
 # ── INSTELLINGEN ──────────────────────────────────────────────
-WEBSITE_MAP = Path(r"M:\Streetsteel.com\website\streetsteel")
+WEBSITE_MAP = Path(r"c:\streetsteel")
 
 MAPPEN = ["nederland", "europa", "fabrikanten"]
 
