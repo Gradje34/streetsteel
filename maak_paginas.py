@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 
 # ── INSTELLINGEN ──────────────────────────────────────────────
-WEBSITE_MAP = Path(r"M:\Streetsteel.com\website\streetsteel")
+WEBSITE_MAP = Path(r"C:\streetsteel")
 
 # ── ALLE LOCATIES ─────────────────────────────────────────────
 
@@ -112,7 +112,7 @@ def stad_template_nl(stad_naam, fotos_pad, css_pad, js_pad):
             <span class="logo-icon">⬡</span>
             <div class="logo-text">
                 <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
-                <span class="logo-sub">.COM</span>
+                <span class="logo-sub">.EU</span>
             </div>
         </a>
         <nav class="main-nav">
@@ -177,7 +177,7 @@ def stad_template_nl(stad_naam, fotos_pad, css_pad, js_pad):
                     <div class="logo-text"><span class="logo-main">STREET</span><span class="logo-accent">STEEL</span></div>
                 </a>
                 <p data-i18n="footer.tagline">Putdeksels van de wereld.</p>
-                <a href="https://paypal.me/gradje340" target="_blank" class="btn btn--paypal btn--sm">♥ PayPal donatie</a>
+                
             </div>
             <div class="footer-nav">
                 <h4 data-i18n="footer.nav.locations">Locaties</h4>
@@ -267,7 +267,7 @@ def europa_stad_template(land, stad, fotos_pad, css_pad, js_pad):
             <span class="logo-icon">⬡</span>
             <div class="logo-text">
                 <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
-                <span class="logo-sub">.COM</span>
+                <span class="logo-sub">.EU</span>
             </div>
         </a>
         <nav class="main-nav">
@@ -333,7 +333,7 @@ def europa_stad_template(land, stad, fotos_pad, css_pad, js_pad):
                     <div class="logo-text"><span class="logo-main">STREET</span><span class="logo-accent">STEEL</span></div>
                 </a>
                 <p data-i18n="footer.tagline">Putdeksels van de wereld.</p>
-                <a href="https://paypal.me/gradje340" target="_blank" class="btn btn--paypal btn--sm">♥ PayPal donatie</a>
+                
             </div>
             <div class="footer-nav">
                 <h4 data-i18n="footer.nav.locations">Locaties</h4>
@@ -386,7 +386,7 @@ def fabrikant_template(fab_naam, css_pad, js_pad):
             <span class="logo-icon">⬡</span>
             <div class="logo-text">
                 <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
-                <span class="logo-sub">.COM</span>
+                <span class="logo-sub">.EU</span>
             </div>
         </a>
         <nav class="main-nav">
@@ -457,7 +457,7 @@ def fabrikant_template(fab_naam, css_pad, js_pad):
                     <div class="logo-text"><span class="logo-main">STREET</span><span class="logo-accent">STEEL</span></div>
                 </a>
                 <p data-i18n="footer.tagline">Putdeksels van de wereld.</p>
-                <a href="https://paypal.me/gradje340" target="_blank" class="btn btn--paypal btn--sm">♥ PayPal donatie</a>
+                
             </div>
             <div class="footer-nav">
                 <h4 data-i18n="footer.nav.locations">Locaties</h4>

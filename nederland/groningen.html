@@ -11,56 +11,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<!-- HEADER -->
 <header class="site-header">
     <div class="header-inner">
         <a href="../index.html" class="logo">
             <span class="logo-icon">⬡</span>
             <div class="logo-text">
                 <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
-                <span class="logo-sub">.COM</span>
+                <span class="logo-sub">.EU</span>
             </div>
         </a>
         <nav class="main-nav">
             <a href="../index.html" class="nav-link">Home</a>
-            <div class="nav-dropdown">
-                <a href="../nederland.html" class="nav-link active">Nederland</a>
-                <div class="dropdown-menu">
-                    <a href="amsterdam.html">Amsterdam</a>
-                    <a href="apeldoorn.html">Apeldoorn</a>
-                    <a href="delfzijl.html">Delfzijl</a>
-                    <a href="eindhoven.html">Eindhoven</a>
-                    <a href="emmen.html">Emmen</a>
-                    <a href="groningen.html">Groningen</a>
-                    <a href="harderwijk.html">Harderwijk</a>
-                    <a href="helmond.html">Helmond</a>
-                    <a href="hoogezand.html">Hoogezand</a>
-                    <a href="lelystad.html">Lelystad</a>
-                    <a href="veendam.html">Veendam</a>
-                    <a href="winschoten.html">Winschoten</a>
-                </div>
-            </div>
-            <div class="nav-dropdown">
-                <a href="../europa.html" class="nav-link">Europa</a>
-                <div class="dropdown-menu">
-                    <a href="../europa/noorwegen.html">Noorwegen</a>
-                    <a href="../europa/duitsland.html">Duitsland</a>
-                    <a href="../europa.html"><em>Alle landen →</em></a>
-                </div>
-            </div>
+            <a href="../nederland.html" class="nav-link active">Nederland</a>
+            <a href="../europa.html" class="nav-link">Europa</a>
             <a href="../fabrikanten.html" class="nav-link">Fabrikanten</a>
             <a href="../over.html" class="nav-link">Over</a>
         </nav>
         <div class="header-right">
             <div class="lang-switcher" id="langSwitcher"></div>
-            <button class="menu-toggle" id="menuToggle">
-                <span></span><span></span><span></span>
-            </button>
+            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
         </div>
     </div>
 </header>
-
 <div class="mobile-menu" id="mobileMenu">
     <nav class="mobile-nav">
         <a href="../index.html">Home</a>
@@ -70,8 +42,6 @@
         <a href="../over.html">Over</a>
     </nav>
 </div>
-
-<!-- PAGINA HERO -->
 <div class="page-hero">
     <div class="container">
         <div class="breadcrumb">
@@ -83,79 +53,36 @@
         </div>
         <h1 class="page-title">Groningen</h1>
         <div class="page-meta">
+            <div class="page-meta-item"><span>🇳🇱</span><span data-i18n="country.nl">Nederland</span></div>
             <div class="page-meta-item">
-                <span>🇳🇱</span>
-                <span data-i18n="country.nl">Nederland</span>
-            </div>
-            <div class="page-meta-item">
-                <strong class="photo-count-live"></strong>
-                &nbsp;<span data-i18n="page.photos">foto's op deze pagina</span>
+                <strong class="photo-count-live"></strong>&nbsp;<span data-i18n="page.photos">foto's op deze pagina</span>
             </div>
         </div>
     </div>
 </div>
-
-<!-- GALERIJ -->
 <section class="photo-gallery">
     <div class="container">
-        <div class="gallery-grid" id="galleryGrid">
-            <!--
-                Foto's worden hier automatisch ingevoegd door het beheerpaneel.
-                Elke foto krijgt dit formaat:
-
-                <div class="gallery-item">
-                    <img data-src="../../M:/Streetsteel.com/fotos/nederland/groningen/bestandsnaam.jpg"
-                         src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                         alt="Putdeksel Groningen"
-                         loading="lazy">
-                    <div class="gallery-item-overlay"></div>
-                </div>
-            -->
-        </div>
-
-        <div class="gallery-empty" id="galleryEmpty" style="
-            text-align:center; padding:80px 0;
-            color: #555; font-family: 'Barlow Condensed', sans-serif;
-            font-size:18px; letter-spacing:0.1em; text-transform:uppercase;
-        ">
-            Foto's worden geladen via het beheerpaneel...
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="gallery-empty" id="galleryEmpty" style="text-align:center;padding:80px 0;color:#555;font-family:'Barlow Condensed',sans-serif;font-size:18px;letter-spacing:0.1em;text-transform:uppercase;">
+            Foto's worden geladen...
         </div>
     </div>
 </section>
-
-<!-- GERELATEERDE FABRIKANTEN -->
-<section class="section section--dark">
-    <div class="container">
-        <div class="section-header">
-            <span class="section-tag">FABRIKANTEN IN GRONINGEN</span>
-            <h2 class="section-title">Herkende producenten</h2>
-        </div>
-        <div class="manufacturer-list" id="relatedManufacturers">
-            <!-- Wordt gevuld via beheerpaneel -->
-        </div>
-    </div>
-</section>
-
-<!-- STEUN KNOP -->
 <div class="floating-support" id="floatingSupport">
     <a href="https://paypal.me/gradje340" target="_blank" rel="noopener" class="floating-support__btn">
         ♥ <span data-i18n="support.floating">Steun</span>
     </a>
 </div>
-
-<!-- FOOTER -->
 <footer class="site-footer">
     <div class="container">
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="../index.html" class="logo">
                     <span class="logo-icon">⬡</span>
-                    <div class="logo-text">
-                        <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
-                    </div>
+                    <div class="logo-text"><span class="logo-main">STREET</span><span class="logo-accent">STEEL</span></div>
                 </a>
                 <p data-i18n="footer.tagline">Putdeksels van de wereld.</p>
-                <a href="https://paypal.me/gradje340" target="_blank" class="btn btn--paypal btn--sm">♥ PayPal donatie</a>
+                
             </div>
             <div class="footer-nav">
                 <h4 data-i18n="footer.nav.locations">Locaties</h4>
@@ -178,21 +105,42 @@
         </div>
     </div>
 </footer>
-
 <script src="../src/js/i18n.js"></script>
 <script src="../src/js/main.js"></script>
 <script>
-// Laad foto's voor deze pagina vanuit de foto-data
 document.addEventListener("DOMContentLoaded", () => {
-    // Foto's worden hier ingevoegd door het CMS/beheerpaneel
-    // In productie leest dit de foto's uit de juiste map
+    // Laad foto's automatisch uit de fotos map
     const grid = document.getElementById("galleryGrid");
     const empty = document.getElementById("galleryEmpty");
-    if (grid.children.length > 0) {
-        empty.style.display = "none";
-    }
+    const fotosPad = "fotos/nederland/groningen";
+
+    fetch("/fotos/nederland/groningen/")
+        .then(r => r.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const links = [...doc.querySelectorAll("a[href]")]
+                .map(a => a.getAttribute("href"))
+                .filter(h => /\.(jpg|jpeg|png|webp)$/i.test(h));
+
+            if (links.length > 0) {
+                empty.style.display = "none";
+                links.forEach(link => {
+                    const item = document.createElement("div");
+                    item.className = "gallery-item";
+                    const src = link.startsWith("http") ? link : `/fotos/nederland/groningen/${link}`;
+                    item.innerHTML = `<img data-src="${src}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Putdeksel Groningen" loading="lazy"><div class="gallery-item-overlay"></div>`;
+                    grid.appendChild(item);
+                });
+                initLazyLoad();
+                initLightbox();
+                initPhotoCounts();
+            }
+        })
+        .catch(() => {
+            // Directe foto's proberen
+        });
 });
 </script>
-<script src="../src/js/fotos.js"></script>
 </body>
 </html>
