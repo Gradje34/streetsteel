@@ -14,8 +14,8 @@ import json
 from pathlib import Path
 
 # ── INSTELLINGEN ──────────────────────────────────────────────
-FOTOS_MAP   = Path(r"M:\Streetsteel.com\fotos")
-WEBSITE_MAP = Path(r"M:\Streetsteel.com\website\streetsteel")
+FOTOS_MAP   = Path(r"C:\streetsteel\fotos")
+WEBSITE_MAP = Path(r"C:\streetsteel")
 DATA_MAP    = WEBSITE_MAP / "data"
 
 FOTO_EXTENSIES = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
