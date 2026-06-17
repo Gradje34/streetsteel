@@ -5,6 +5,24 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    // === Tellers voor overzichtspagina's (kaarten) ===
+    // Moet VÓÓR de galleryGrid-check staan, want overzichtspagina's
+    // (nederland.html, europa.html, fabrikanten.html) hebben geen grid.
+    const tellerEls = document.querySelectorAll(".photo-count[data-page]");
+    if (tellerEls.length > 0) {
+        fetch("/data/tellers.json")
+            .then(r => r.json())
+            .then(tellers => {
+                tellerEls.forEach(el => {
+                    const page = el.getAttribute("data-page");
+                    const aantal = tellers[page] || 0;
+                    el.textContent = aantal === 1 ? "1 foto" : `${aantal} foto's`;
+                });
+            })
+            .catch(() => {});
+    }
+
+    // === Galerij op detailpagina's ===
     const grid  = document.getElementById("galleryGrid");
     const empty = document.getElementById("galleryEmpty");
     if (!grid) return;
@@ -75,21 +93,4 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(() => {
             if (empty) empty.textContent = "Foto's worden binnenkort toegevoegd.";
         });
-
-// Laad ook de tellers voor overzichtspagina's - met vertraging
-    setTimeout(() => {
-        const tellerEls = document.querySelectorAll(".photo-count[data-page]");
-        if (tellerEls.length > 0) {
-            fetch("/data/tellers.json")
-                .then(r => r.json())
-                .then(tellers => {
-                    tellerEls.forEach(el => {
-                        const page = el.getAttribute("data-page");
-                        const aantal = tellers[page] || 0;
-                        el.textContent = aantal === 1 ? `1 foto` : `${aantal} foto's`;
-                    });
-                })
-                .catch(() => {});
-        }
-    }, 500); 
 });

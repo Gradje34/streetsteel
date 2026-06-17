@@ -3,33 +3,53 @@
  * Laadt foto's automatisch via JSON data bestanden
  */
 
-function laadFotos() {
+document.addEventListener("DOMContentLoaded", () => {
+
+    // === Tellers voor overzichtspagina's (kaarten) ===
+    // Moet VÓÓR de galleryGrid-check staan, want overzichtspagina's
+    // (nederland.html, europa.html, fabrikanten.html) hebben geen grid.
+    const tellerEls = document.querySelectorAll(".photo-count[data-page]");
+    if (tellerEls.length > 0) {
+        fetch("/data/tellers.json")
+            .then(r => r.json())
+            .then(tellers => {
+                tellerEls.forEach(el => {
+                    const page = el.getAttribute("data-page");
+                    const aantal = tellers[page] || 0;
+                    el.textContent = aantal === 1 ? "1 foto" : `${aantal} foto's`;
+                });
+            })
+            .catch(() => {});
+    }
+
+    // === Galerij op detailpagina's ===
     const grid  = document.getElementById("galleryGrid");
     const empty = document.getElementById("galleryEmpty");
     if (!grid) return;
 
-    // Verwijder .html en trailing slash uit het pad
-    const pad = window.location.pathname.replace(/\.html$/, "").replace(/\/$/, "");
+    // Bepaal welk JSON bestand we nodig hebben op basis van het URL pad
+    const pad = window.location.pathname;
     let jsonPad = null;
 
-    // /nederland/groningen → /data/nederland/groningen.json
-    const nlMatch = pad.match(/\/nederland\/([^/]+)$/);
+    // nederland/groningen.html → /data/nederland/groningen.json
+    const nlMatch = pad.match(/\/nederland\/([^.]+)\.html/);
     if (nlMatch) jsonPad = `/data/nederland/${nlMatch[1]}.json`;
 
-    // /europa/noorwegen/oslo → /data/europa/noorwegen/oslo.json
-    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^/]+)$/);
+    // europa/noorwegen/oslo.html → /data/europa/noorwegen/oslo.json
+    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^.]+)\.html/);
     if (euStadMatch) jsonPad = `/data/europa/${euStadMatch[1]}/${euStadMatch[2]}.json`;
 
-    // /europa/noorwegen → /data/europa/noorwegen.json
-    const euLandMatch = pad.match(/\/europa\/([^/]+)$/);
+    // europa/noorwegen.html → /data/europa/noorwegen.json
+    const euLandMatch = pad.match(/\/europa\/([^/]+)\.html/);
     if (euLandMatch && !euStadMatch) jsonPad = `/data/europa/${euLandMatch[1]}.json`;
 
-    // /fabrikanten/wavin → /data/fabrikanten/wavin.json
-    const fabMatch = pad.match(/\/fabrikanten\/([^/]+)$/);
+    // fabrikanten/wavin.html → /data/fabrikanten/wavin.json
+    const fabMatch = pad.match(/\/fabrikanten\/([^.]+)\.html/);
     if (fabMatch) jsonPad = `/data/fabrikanten/${fabMatch[1]}.json`;
 
     if (!jsonPad) return;
 
+    // Laad de JSON data
     fetch(jsonPad)
         .then(r => {
             if (!r.ok) throw new Error("Geen data");
@@ -49,44 +69,28 @@ function laadFotos() {
                 const item = document.createElement("div");
                 item.className = "gallery-item";
                 item.innerHTML = `
-                    <img src="${fotoUrl}"
+                    <img data-src="${fotoUrl}"
+                         src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
                          alt="Putdeksel"
-                         loading="lazy"
-                         style="width:100%;height:100%;object-fit:cover;">
+                         loading="lazy">
                     <div class="gallery-item-overlay"></div>
                 `;
                 grid.appendChild(item);
             });
 
-            // Update fototeller
+            // Initialiseer lazy loading en lightbox
+            if (typeof initLazyLoad === "function") initLazyLoad();
+            if (typeof initLightbox  === "function") initLightbox();
+            if (typeof initPhotoCounts === "function") initPhotoCounts();
+
+            // Update de fototeller bovenaan de pagina
             const teller = document.querySelector(".photo-count-live");
             if (teller) {
                 const aantal = fotos.length;
                 teller.textContent = aantal === 1 ? `1 foto` : `${aantal} foto's`;
             }
-
-            // Lightbox
-            if (typeof initLightbox === "function") initLightbox();
         })
         .catch(() => {
             if (empty) empty.textContent = "Foto's worden binnenkort toegevoegd.";
         });
-
-    // Tellers voor overzichtspagina's
-    const tellerEls = document.querySelectorAll(".photo-count[data-page]");
-    if (tellerEls.length > 0) {
-        fetch("/data/tellers.json")
-            .then(r => r.json())
-            .then(tellers => {
-                tellerEls.forEach(el => {
-                    const page = el.getAttribute("data-page");
-                    const aantal = tellers[page] || 0;
-                    el.textContent = aantal === 1 ? `1 foto` : `${aantal} foto's`;
-                });
-            })
-            .catch(() => {});
-    }
-}
-
-// Direct uitvoeren — script staat onderaan de pagina dus DOM is al klaar
-laadFotos();
+});
