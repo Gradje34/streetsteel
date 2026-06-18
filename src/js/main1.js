@@ -133,9 +133,7 @@ function initLightbox() {
     // Verzamel alle afbeeldingen
     lightboxImages = Array.from(items).map(item => {
         const img = item.querySelector("img");
-        // Gebruik data-src (de echte URL) als die er is; door lazy loading
-        // staat in src soms nog een lege placeholder.
-        return img ? (img.dataset.src || img.src) : "";
+        return img ? img.src : "";
     }).filter(Boolean);
 
     // Maak lightbox element
