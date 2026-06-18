@@ -107,41 +107,6 @@
 </footer>
 <script src="../src/js/i18n.js"></script>
 <script src="../src/js/main.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    // Laad foto's automatisch uit de fotos map
-    const grid = document.getElementById("galleryGrid");
-    const empty = document.getElementById("galleryEmpty");
-    const fotosPad = "fotos/nederland/harderwijk";
-
-    fetch("/fotos/nederland/harderwijk/")
-        .then(r => r.text())
-        .then(html => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
-            const links = [...doc.querySelectorAll("a[href]")]
-                .map(a => a.getAttribute("href"))
-                .filter(h => /\.(jpg|jpeg|png|webp)$/i.test(h));
-
-            if (links.length > 0) {
-                empty.style.display = "none";
-                links.forEach(link => {
-                    const item = document.createElement("div");
-                    item.className = "gallery-item";
-                    const src = link.startsWith("http") ? link : `/fotos/nederland/harderwijk/${link}`;
-                    item.innerHTML = `<img data-src="${src}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Putdeksel Harderwijk" loading="lazy"><div class="gallery-item-overlay"></div>`;
-                    grid.appendChild(item);
-                });
-                initLazyLoad();
-                initLightbox();
-                initPhotoCounts();
-            }
-        })
-        .catch(() => {
-            // Directe foto's proberen
-        });
-});
-</script>
 <script src="../src/js/fotos.js"></script>
 </body>
 </html>
