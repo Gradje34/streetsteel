@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://streetsteel.eu/sitemap.xml
