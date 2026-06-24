@@ -5,19 +5,33 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // === Tellers voor overzichtspagina's (kaarten) ===
+    // === Tellers voor overzichtspagina's + totaal voor de homepage ===
     // Moet VÓÓR de galleryGrid-check staan, want overzichtspagina's
-    // (nederland.html, europa.html, fabrikanten.html) hebben geen grid.
+    // (nederland.html, europa.html, fabrikanten.html) en de homepage
+    // hebben geen galleryGrid.
     const tellerEls = document.querySelectorAll(".photo-count[data-page]");
-    if (tellerEls.length > 0) {
+    const totaalEl  = document.getElementById("totaalFotos");
+
+    if (tellerEls.length > 0 || totaalEl) {
         fetch("/data/tellers.json")
             .then(r => r.json())
             .then(tellers => {
+                // Vul de tellers op de overzichtskaarten
                 tellerEls.forEach(el => {
                     const page = el.getAttribute("data-page");
                     const aantal = tellers[page] || 0;
                     el.textContent = aantal === 1 ? "1 foto" : `${aantal} foto's`;
                 });
+
+                // Vul het totaal aantal foto's in de hero (homepage)
+                if (totaalEl) {
+                    const totaal = Object.values(tellers)
+                        .reduce((som, n) => som + (Number(n) || 0), 0);
+                    // Rond naar beneden af op het dichtstbijzijnde 10-tal,
+                    // zodat het getal met "+" altijd waar blijft.
+                    const afgerond = Math.floor(totaal / 10) * 10;
+                    totaalEl.textContent = `${afgerond}+`;
+                }
             })
             .catch(() => {});
     }
@@ -31,20 +45,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const pad = window.location.pathname;
     let jsonPad = null;
 
-    // nederland/groningen(.html) → /data/nederland/groningen.json
-    const nlMatch = pad.match(/\/nederland\/([^/.]+)(?:\.html)?$/);
+    // nederland/groningen.html → /data/nederland/groningen.json
+    const nlMatch = pad.match(/\/nederland\/([^.]+)\.html/);
     if (nlMatch) jsonPad = `/data/nederland/${nlMatch[1]}.json`;
 
-    // europa/noorwegen/oslo(.html) → /data/europa/noorwegen/oslo.json
-    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^/.]+)(?:\.html)?$/);
+    // europa/noorwegen/oslo.html → /data/europa/noorwegen/oslo.json
+    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^.]+)\.html/);
     if (euStadMatch) jsonPad = `/data/europa/${euStadMatch[1]}/${euStadMatch[2]}.json`;
 
-    // europa/noorwegen(.html) → /data/europa/noorwegen.json
-    const euLandMatch = pad.match(/\/europa\/([^/.]+)(?:\.html)?$/);
+    // europa/noorwegen.html → /data/europa/noorwegen.json
+    const euLandMatch = pad.match(/\/europa\/([^/]+)\.html/);
     if (euLandMatch && !euStadMatch) jsonPad = `/data/europa/${euLandMatch[1]}.json`;
 
-    // fabrikanten/wavin(.html) → /data/fabrikanten/wavin.json
-    const fabMatch = pad.match(/\/fabrikanten\/([^/.]+)(?:\.html)?$/);
+    // fabrikanten/wavin.html → /data/fabrikanten/wavin.json
+    const fabMatch = pad.match(/\/fabrikanten\/([^.]+)\.html/);
     if (fabMatch) jsonPad = `/data/fabrikanten/${fabMatch[1]}.json`;
 
     if (!jsonPad) return;

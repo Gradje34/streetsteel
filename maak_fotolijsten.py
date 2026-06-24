@@ -11,6 +11,7 @@ Draai dit na elke keer dat je nieuwe foto's toevoegt.
 
 import os
 import json
+import re
 from pathlib import Path
 
 # ── INSTELLINGEN ──────────────────────────────────────────────
@@ -40,6 +41,31 @@ def schrijf_json(pad, data):
         json.dumps(data, ensure_ascii=False, indent=2),
         encoding="utf-8"
     )
+
+
+
+def werk_hero_fallback_bij(totaal_fotos):
+    """Werk het fallback-getal id="totaalFotos" in index.html bij.
+
+    Het live getal wordt door fotos.js gezet; dit is alleen de fallback
+    voor als JavaScript niet laadt. Naar beneden afgerond op 50, met "+".
+    """
+    index_pad = WEBSITE_MAP / "index.html"
+    if not index_pad.exists():
+        print("  ⚠️  index.html niet gevonden, fallback niet bijgewerkt.")
+        return
+    afgerond = (totaal_fotos // 10) * 10
+    html = index_pad.read_text(encoding="utf-8")
+    nieuw, n = re.subn(
+        r'(<span class="stat-num" id="totaalFotos">)[^<]*(</span>)',
+        rf'\g<1>{afgerond}+\g<2>',
+        html,
+    )
+    if n == 0:
+        print('  ⚠️  id="totaalFotos" niet gevonden in index.html.')
+        return
+    index_pad.write_text(nieuw, encoding="utf-8")
+    print(f"  ✅ Hero-fallback bijgewerkt: {afgerond}+")
 
 
 # ── HOOFDPROGRAMMA ────────────────────────────────────────────
@@ -126,6 +152,11 @@ def main():
     # Schrijf alle tellers naar één overzichtsbestand
     schrijf_json(DATA_MAP / "tellers.json", alle_tellers)
     print(f"\n✅ Tellers overzicht: data/tellers.json")
+
+    # Werk het fallback-getal in de homepage-hero bij
+    totaal_fotos = sum(alle_tellers.values())
+    werk_hero_fallback_bij(totaal_fotos)
+    print(f"\n📸 Totaal aantal foto's: {totaal_fotos}")
 
     # ── EINDRAPPORT ──────────────────────────────────────────
     print(f"\n{'=' * 55}")
