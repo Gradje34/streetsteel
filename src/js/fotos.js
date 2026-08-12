@@ -45,20 +45,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const pad = window.location.pathname;
     let jsonPad = null;
 
-    // nederland/groningen.html → /data/nederland/groningen.json
-    const nlMatch = pad.match(/\/nederland\/([^.]+)\.html/);
+// nederland/groningen(.html) → /data/nederland/groningen.json
+    const nlMatch = pad.match(/\/nederland\/([^/.]+)(?:\.html)?$/);
     if (nlMatch) jsonPad = `/data/nederland/${nlMatch[1]}.json`;
 
-    // europa/noorwegen/oslo.html → /data/europa/noorwegen/oslo.json
-    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^.]+)\.html/);
+    // europa/noorwegen/oslo(.html) → /data/europa/noorwegen/oslo.json
+    const euStadMatch = pad.match(/\/europa\/([^/]+)\/([^/.]+)(?:\.html)?$/);
     if (euStadMatch) jsonPad = `/data/europa/${euStadMatch[1]}/${euStadMatch[2]}.json`;
 
-    // europa/noorwegen.html → /data/europa/noorwegen.json
-    const euLandMatch = pad.match(/\/europa\/([^/]+)\.html/);
+    // europa/noorwegen(.html) → /data/europa/noorwegen.json
+    const euLandMatch = pad.match(/\/europa\/([^/.]+)(?:\.html)?$/);
     if (euLandMatch && !euStadMatch) jsonPad = `/data/europa/${euLandMatch[1]}.json`;
 
-    // fabrikanten/wavin.html → /data/fabrikanten/wavin.json
-    const fabMatch = pad.match(/\/fabrikanten\/([^.]+)\.html/);
+    // fabrikanten/wavin(.html) → /data/fabrikanten/wavin.json
+    const fabMatch = pad.match(/\/fabrikanten\/([^/.]+)(?:\.html)?$/);
     if (fabMatch) jsonPad = `/data/fabrikanten/${fabMatch[1]}.json`;
 
     if (!jsonPad) return;
