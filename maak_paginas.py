@@ -202,41 +202,6 @@ def stad_template_nl(stad_naam, fotos_pad, css_pad, js_pad):
 </footer>
 <script src="{js_pad.replace("main.js", "i18n.js")}"></script>
 <script src="{js_pad}"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {{
-    // Laad foto's automatisch uit de fotos map
-    const grid = document.getElementById("galleryGrid");
-    const empty = document.getElementById("galleryEmpty");
-    const fotosPad = "{fotos_pad}";
-
-    fetch("/{fotos_pad}/")
-        .then(r => r.text())
-        .then(html => {{
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, "text/html");
-            const links = [...doc.querySelectorAll("a[href]")]
-                .map(a => a.getAttribute("href"))
-                .filter(h => /\.(jpg|jpeg|png|webp)$/i.test(h));
-
-            if (links.length > 0) {{
-                empty.style.display = "none";
-                links.forEach(link => {{
-                    const item = document.createElement("div");
-                    item.className = "gallery-item";
-                    const src = link.startsWith("http") ? link : `/{fotos_pad}/${{link}}`;
-                    item.innerHTML = `<img data-src="${{src}}" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Putdeksel {stad_titel}" loading="lazy"><div class="gallery-item-overlay"></div>`;
-                    grid.appendChild(item);
-                }});
-                initLazyLoad();
-                initLightbox();
-                initPhotoCounts();
-            }}
-        }})
-        .catch(() => {{
-            // Directe foto's proberen
-        }});
-}});
-</script>
 </body>
 </html>'''
 
