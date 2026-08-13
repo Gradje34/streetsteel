@@ -9,6 +9,125 @@
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Alfabetbalk fabrikanten ===== */
+.az-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0 0 48px;
+    padding: 12px;
+    background: var(--clr-bg-2, #151515);
+    border: 1px solid var(--clr-border, #2e2e2e);
+    border-radius: var(--radius-lg, 8px);
+}
+.az-letter {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 34px;
+    text-align: center;
+}
+.az-letter-label {
+    display: block;
+    font-family: var(--font-condensed, 'Barlow Condensed', sans-serif);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 40px;
+    color: var(--clr-text, #e8e4dc);
+    border-radius: var(--radius, 4px);
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+    user-select: none;
+}
+.az-letter.az-open > .az-letter-label {
+    background: var(--clr-accent, #c8892a);
+    color: #0e0e0e;
+}
+/* hover-highlight alleen op echte hover-apparaten (desktop) */
+@media (hover: hover) {
+    .az-letter:not(.az-letter--empty):hover > .az-letter-label {
+        background: var(--clr-accent, #c8892a);
+        color: #0e0e0e;
+    }
+}
+.az-letter--empty > .az-letter-label {
+    color: var(--clr-text-faint, #555550);
+    cursor: default;
+}
+/* flyout met fabrikanten voor die letter */
+.az-flyout {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    min-width: 200px;
+    max-width: 280px;
+    background: var(--clr-surface, #222222);
+    border: 1px solid var(--clr-border-light, #3a3a3a);
+    border-radius: var(--radius, 4px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    padding: 6px;
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    text-align: left;
+}
+.az-letter.az-open > .az-flyout {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+/* hover-open alleen op echte hover-apparaten (desktop) */
+@media (hover: hover) {
+    .az-letter:not(.az-letter--empty):hover > .az-flyout {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+.az-flyout-item {
+    display: block;
+    padding: 7px 12px;
+    font-family: var(--font-body, 'Barlow', sans-serif);
+    font-size: 14px;
+    color: var(--clr-text, #e8e4dc);
+    text-decoration: none;
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background 0.12s ease, color 0.12s ease;
+}
+.az-flyout-item:hover {
+    background: var(--clr-bg-3, #1c1c1c);
+    color: var(--clr-accent, #c8892a);
+}
+@media (max-width: 640px) {
+    /* Op mobiel bestaat hover niet: de flyout opent op tik (az-open via JS).
+       We tonen hem als brede strook onder de balk, verankerd aan de balk zelf,
+       zodat hij nooit buiten beeld valt en altijd goed leesbaar is. */
+    .az-bar { position: relative; }
+    .az-letter { min-width: 30px; position: static; }
+    .az-letter-label { font-size: 17px; line-height: 34px; }
+
+    /* Alleen de aangetikte (az-open) letter toont zijn flyout: brede strook
+       onder de hele balk, verankerd aan .az-bar (position: relative hierboven). */
+    .az-letter.az-open > .az-flyout {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        transform: none;
+        margin-top: 8px;
+        min-width: 0;
+        max-width: none;
+        width: 100%;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+    }
+}
+</style>
+
 </head>
 <body>
 <header class="site-header">
@@ -59,6 +178,34 @@
 
 <section class="section">
     <div class="container">
+        <div class="az-bar" id="azBar">
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">A</span><div class="az-flyout"><a href="fabrikanten/alphacan.html" class="az-flyout-item">Alphacan</a><a href="fabrikanten/aquagate.html" class="az-flyout-item">Aquagate</a><a href="fabrikanten/aquafix.html" class="az-flyout-item">Aquafix</a><a href="fabrikanten/aqauway.html" class="az-flyout-item">Aquaway</a><a href="fabrikanten/avk.html" class="az-flyout-item">AVK</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">B</span><div class="az-flyout"><a href="fabrikanten/b-oz.html" class="az-flyout-item">B-OZ</a></div></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">C</span></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">D</span><div class="az-flyout"><a href="fabrikanten/de-globe.html" class="az-flyout-item">De Globe</a><a href="fabrikanten/de-leidinggroothandel.html" class="az-flyout-item">De Leidinggroothandel</a><a href="fabrikanten/delta-plast.html" class="az-flyout-item">Delta Plast</a><a href="fabrikanten/dijg.html" class="az-flyout-item">DIJG</a><a href="fabrikanten/draka-polva.html" class="az-flyout-item">Draka Polva</a><a href="fabrikanten/dyka.html" class="az-flyout-item">Dyka</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">E</span><div class="az-flyout"><a href="fabrikanten/ewe.html" class="az-flyout-item">EWE</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">F</span><div class="az-flyout"><a href="fabrikanten/fibrelita.html" class="az-flyout-item">Fibrelita</a><a href="fabrikanten/fmh-pompservice.html" class="az-flyout-item">FMH Pompservice</a><a href="fabrikanten/frelu.html" class="az-flyout-item">Frelu</a><a href="fabrikanten/friand.html" class="az-flyout-item">Friand</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">G</span><div class="az-flyout"><a href="fabrikanten/geertsema.html" class="az-flyout-item">Geertsema</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">H</span><div class="az-flyout"><a href="fabrikanten/hauraton.html" class="az-flyout-item">Hauraton</a><a href="fabrikanten/hermelock.html" class="az-flyout-item">Hermelock</a></div></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">I</span></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">J</span><div class="az-flyout"><a href="fabrikanten/joosten.html" class="az-flyout-item">Joosten</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">K</span><div class="az-flyout"><a href="fabrikanten/kamphuis.html" class="az-flyout-item">Kamphuis</a><a href="fabrikanten/kb.html" class="az-flyout-item">KB</a><a href="fabrikanten/kessel.html" class="az-flyout-item">Kessel</a><a href="fabrikanten/ksk.html" class="az-flyout-item">KSK</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">L</span><div class="az-flyout"><a href="fabrikanten/landustrie.html" class="az-flyout-item">Landustrie</a><a href="fabrikanten/lhs.html" class="az-flyout-item">LHS</a><a href="fabrikanten/lovink.html" class="az-flyout-item">Lovink</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">M</span><div class="az-flyout"><a href="fabrikanten/martens.html" class="az-flyout-item">Martens</a><a href="fabrikanten/meijer.html" class="az-flyout-item">Meijer</a><a href="fabrikanten/milder.html" class="az-flyout-item">Milder</a><a href="fabrikanten/mous.html" class="az-flyout-item">Mous</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">N</span><div class="az-flyout"><a href="fabrikanten/natuurbeton-milieu.html" class="az-flyout-item">Natuurbeton Milieu</a><a href="fabrikanten/neering-bogel.html" class="az-flyout-item">Neering Bogel</a><a href="fabrikanten/nki.html" class="az-flyout-item">NKI</a><a href="fabrikanten/norinco.html" class="az-flyout-item">Norinco</a><a href="fabrikanten/nyloplast.html" class="az-flyout-item">Nyloplast</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">O</span><div class="az-flyout"><a href="fabrikanten/oogink.html" class="az-flyout-item">Oogink</a><a href="fabrikanten/mij-onbekende-producent-en.html" class="az-flyout-item">Onbekende producenten</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">P</span><div class="az-flyout"><a href="fabrikanten/pam.html" class="az-flyout-item">PAM</a><a href="fabrikanten/passevant.html" class="az-flyout-item">Passevant</a><a href="fabrikanten/pipelife.html" class="az-flyout-item">Pipelife</a><a href="fabrikanten/poly.html" class="az-flyout-item">Poly</a></div></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">Q</span></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">R</span></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">S</span><div class="az-flyout"><a href="fabrikanten/samson.html" class="az-flyout-item">Samson</a><a href="fabrikanten/sotra.html" class="az-flyout-item">Sotra</a><a href="fabrikanten/stora.html" class="az-flyout-item">Stora</a><a href="fabrikanten/stradus.html" class="az-flyout-item">Stradus</a><a href="fabrikanten/strucom.html" class="az-flyout-item">Strucom</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">T</span><div class="az-flyout"><a href="fabrikanten/tbs.html" class="az-flyout-item">TBS</a><a href="fabrikanten/thijssen.html" class="az-flyout-item">Thijssen</a><a href="fabrikanten/topatec.html" class="az-flyout-item">Topatec</a></div></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">U</span></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">V</span><div class="az-flyout"><a href="fabrikanten/van-der-velden.html" class="az-flyout-item">Van der Velden</a><a href="fabrikanten/veko.html" class="az-flyout-item">Veko</a><a href="fabrikanten/vulcanus.html" class="az-flyout-item">Vulcanus</a></div></div>
+            <div class="az-letter" tabindex="0"><span class="az-letter-label">W</span><div class="az-flyout"><a href="fabrikanten/w-ten-cate.html" class="az-flyout-item">W. ten Cate</a><a href="fabrikanten/waprog.html" class="az-flyout-item">Waprog</a><a href="fabrikanten/waterleiding-mij-prov-groningen.html" class="az-flyout-item">Waterleiding Mij. Prov. Groningen</a><a href="fabrikanten/wavin.html" class="az-flyout-item">Wavin</a><a href="fabrikanten/weegels.html" class="az-flyout-item">Weegels</a></div></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">X</span></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">Y</span></div>
+            <div class="az-letter az-letter--empty"><span class="az-letter-label">Z</span></div>
+        </div>
         <div class="section-header">
             <span class="section-tag">A — M</span>
         </div>
@@ -171,5 +318,26 @@
 </footer>
 <script src="src/js/i18n.js"></script>
 <script src="src/js/main.js"></script>
+<script>
+/* Alfabetbalk: hover op desktop (CSS), tap op mobiel (JS) */
+(function () {
+    var bar = document.getElementById('azBar');
+    if (!bar) return;
+    bar.addEventListener('click', function (e) {
+        var letter = e.target.closest('.az-letter');
+        if (!letter || letter.classList.contains('az-letter--empty')) return;
+        // alleen op touch/klik toggelen; op desktop doet hover het werk
+        var wasOpen = letter.classList.contains('az-open');
+        bar.querySelectorAll('.az-letter.az-open').forEach(function (el) { el.classList.remove('az-open'); });
+        if (!wasOpen) letter.classList.add('az-open');
+    });
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('#azBar')) {
+            bar.querySelectorAll('.az-letter.az-open').forEach(function (el) { el.classList.remove('az-open'); });
+        }
+    });
+})();
+</script>
+
 </body>
 </html>
