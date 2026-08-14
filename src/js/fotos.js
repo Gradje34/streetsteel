@@ -19,8 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Vul de tellers op de overzichtskaarten
                 tellerEls.forEach(el => {
                     const page = el.getAttribute("data-page");
-                    const aantal = tellers[page] || 0;
-                    el.textContent = aantal === 1 ? "1 foto" : `${aantal} foto's`;
+
+                    // Voor een land-met-steden (bijv. "europa/duitsland") bestaan er
+                    // sub-keys als "europa/duitsland/berlijn". Tel dan het aantal steden
+                    // en de som van hun foto's, en toon "X steden - Y foto's".
+                    const prefix = page + "/";
+                    const substeden = Object.keys(tellers).filter(k => k.startsWith(prefix));
+
+                    if (substeden.length > 0) {
+                        const aantalSteden = substeden.length;
+                        const somFotos = substeden
+                            .reduce((som, k) => som + (Number(tellers[k]) || 0), 0);
+                        const stadLabel = aantalSteden === 1 ? "1 stad" : `${aantalSteden} steden`;
+                        const fotoLabel = somFotos === 1 ? "1 foto" : `${somFotos} foto's`;
+                        el.textContent = `${stadLabel} - ${fotoLabel}`;
+                    } else {
+                        // Land zonder steden, Nederland-stad of fabrikant: eigen fototal.
+                        const aantal = tellers[page] || 0;
+                        el.textContent = aantal === 1 ? "1 foto" : `${aantal} foto's`;
+                    }
                 });
 
                 // Vul het totaal aantal foto's in de hero (homepage)

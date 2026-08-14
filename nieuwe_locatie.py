@@ -333,6 +333,92 @@ def keten_draaien():
     draai_script("voeg_fotosjs_toe.py")
 
 
+def lees_land_gegevens(land_slug):
+    """Lees vlag, weergavenaam en i18n-key van een bestaand land uit maak_paginas.py.
+    Geeft (vlag, naam, i18n) terug, of (None, None, None) als het land niet bestaat."""
+    pad = WEBSITE_MAP / "maak_paginas.py"
+    tekst = pad.read_text(encoding="utf-8")
+    vlag = naam = i18n = None
+    mv = re.search(rf'"{re.escape(land_slug)}"\s*:\s*"([^"]+)"',
+                   tekst[tekst.find("LAND_VLAGGEN"):tekst.find("LAND_NAMEN")])
+    if mv:
+        vlag = mv.group(1)
+    mn = re.search(rf'"{re.escape(land_slug)}"\s*:\s*"([^"]+)"',
+                   tekst[tekst.find("LAND_NAMEN"):tekst.find("LAND_I18N")])
+    if mn:
+        naam = mn.group(1)
+    mi = re.search(rf'"{re.escape(land_slug)}"\s*:\s*"([^"]+)"',
+                   tekst[tekst.find("LAND_I18N"):tekst.find("FABRIKANTEN")])
+    if mi:
+        i18n = mi.group(1)
+    return vlag, naam, i18n
+
+
+def voeg_stad_tegel_in_landpagina(land_slug, stad_slug, stad_naam, vlag, land_naam, i18n):
+    """Voeg een stad-tegel toe aan europa/{land}.html op de alfabetische plek.
+    Zo verschijnt de nieuwe stad direct op de landpagina, zonder maak_landpaginas.py."""
+    pad = WEBSITE_MAP / "europa" / f"{land_slug}.html"
+    if not pad.exists():
+        print(f"   ⚠️  europa/{land_slug}.html niet gevonden — tegel niet toegevoegd.")
+        print(f"      (Landpagina bestaat mogelijk nog niet; controleer handmatig.)")
+        return
+    tekst = pad.read_text(encoding="utf-8")
+    href = f"/europa/{land_slug}/{stad_slug}.html"
+    if f'href="{href}"' in tekst:
+        print(f"   ℹ️  Tegel voor {stad_slug} bestaat al op de landpagina — overgeslagen.")
+        return
+    backup(pad)
+
+    # Tegel-HTML in exact hetzelfde formaat als de bestaande tegels op de landpagina
+    tegel = (
+        f'            <a href="{href}" class="location-card">\n'
+        f'                <div class="card-img-placeholder">\n'
+        f'                    <span class="card-flag">{vlag}</span>\n'
+        f'                </div>\n'
+        f'                <div class="card-body">\n'
+        f'                    <span class="card-country" data-i18n="{i18n}">{land_naam}</span>\n'
+        f'                    <h3 class="card-city">{stad_naam}</h3>\n'
+        f'                    <span class="card-count photo-count" data-page="europa/{land_slug}/{stad_slug}"></span>\n'
+        f'                </div>\n'
+        f'            </a>\n'
+    )
+
+    # Vind de cards-grid en de bijbehorende sluit-</div> via depth-matching
+    open_tag = '<div class="cards-grid">'
+    start = tekst.find(open_tag)
+    if start == -1:
+        print(f"   ⚠️  cards-grid niet gevonden in europa/{land_slug}.html.")
+        return
+    i = start + len(open_tag)
+    depth = 1
+    div_pat = re.compile(r"<div\b|</div>", re.IGNORECASE)
+    grid_eind = -1
+    for m in div_pat.finditer(tekst, i):
+        if m.group(0).lower().startswith("<div"):
+            depth += 1
+        else:
+            depth -= 1
+            if depth == 0:
+                grid_eind = m.start()
+                break
+    if grid_eind == -1:
+        print(f"   ⚠️  Einde van cards-grid niet gevonden.")
+        return
+
+    # Alfabetische invoegplek: vóór het eerste bestaande tegel-slug dat later komt
+    grid_inhoud = tekst[start:grid_eind]
+    kaart_pat = re.compile(r'<a href="/europa/[^/]+/([^"]+?)\.html" class="location-card">')
+    invoeg_pos = grid_eind
+    for m in kaart_pat.finditer(grid_inhoud):
+        if m.group(1).lower() > stad_slug.lower():
+            invoeg_pos = start + m.start()
+            break
+
+    tekst = tekst[:invoeg_pos] + tegel + tekst[invoeg_pos:]
+    pad.write_text(tekst, encoding="utf-8")
+    print(f"   ✅ Stad-tegel toegevoegd op europa/{land_slug}.html (alfabetisch).")
+
+
 def flow_nederland_stad():
     naam = vraag("\nNaam van de stad (bijv. Utrecht): ")
     slug = maak_slug(naam)
@@ -353,17 +439,24 @@ def flow_europa():
 
     if keuze == "1":
         land_slug = maak_slug(vraag("\nLand (slug, bijv. noorwegen): "))
-        naam = vraag("Naam van de stad (bijv. Trondheim): ")
+        # Vlag, naam en i18n automatisch ophalen uit maak_paginas.py (land bestaat al)
+        vlag, land_label, i18n = lees_land_gegevens(land_slug)
+        if vlag is None:
+            print(f"   ⚠️  Land '{land_slug}' niet gevonden in maak_paginas.py.")
+            print("      Gebruik de slug (bijv. 'noorwegen', 'duitsland'), of kies optie 2 voor een NIEUW land.")
+            return
+        print(f"   Land herkend: {land_label} {vlag}")
+        naam = vraag("Naam van de stad zoals getoond (bijv. Trondheim): ")
         stad_slug = maak_slug(naam)
-        vlag = vraag("Vlag-emoji voor dit land (bijv. 🇳🇴): ")
-        land_label = vraag("Landnaam zoals getoond (bijv. Noorwegen): ")
+        stad_naam = naam.strip()
         print(f"   URL-naam wordt: {stad_slug}")
         wacht_op_fotos(FOTOS_MAP / "europa" / land_slug / stad_slug)
         voeg_europa_toe_aan_generator(land_slug, [stad_slug], nieuw_land=False)
         keten_draaien()
-        kaart = kaartje_html(f"europa/{land_slug}/{stad_slug}.html", land_label, vlag,
-                             naam.strip().title(), f"europa/{land_slug}/{stad_slug}")
-        voeg_kaartje_in("europa.html", kaart, f"europa/{land_slug}/{stad_slug}.html")
+        # Stad-tegel invoegen op de landpagina (europa/{land}.html), alfabetisch.
+        # GEEN los kaartje op europa.html: een stad onder een land-met-steden
+        # verschijnt als tegel op de landpagina, niet op het europa-overzicht.
+        voeg_stad_tegel_in_landpagina(land_slug, stad_slug, stad_naam, vlag, land_label, i18n)
         return
 
     # NIEUW land

@@ -23,9 +23,7 @@ NEDERLAND_STEDEN = [
 
 EUROPA_LANDEN = {
     "denemarken": ["korsor"],
-    "duitsland":  ["bad-neuenahr-ahrweiler", "berlijn", "hohn",
-                   "hohenschwangau", "kavelaer", "kiel", "kornau",
-                   "leer", "oberhausen", "oldenburg", "riezlern"],
+    "duitsland": ["bad-neuenahr-ahrweiler", "berlijn", "hohenschwangau", "hohn", "kavelaer", "kiel", "kornau", "leer", "oberhausen", "oldenburg", "riezlern", "weinheim"],
     "frankrijk":  [],
     "hongarije":  ["boedapest"],
     "italie":     ["como", "sicilie"],
