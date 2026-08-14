@@ -534,6 +534,124 @@ def flow_fabrikant():
     voeg_fabrikant_item_in(slug, naam.strip())
 
 
+def lees_bestaande_locaties(soort):
+    """Geef een lijst (slug, weergavenaam, fotomap_pad) van bestaande locaties.
+    soort is 'nederland', 'europa' of 'fabrikant'."""
+    mp = WEBSITE_MAP / "maak_paginas.py"
+    tekst = mp.read_text(encoding="utf-8")
+    resultaat = []
+
+    if soort == "nederland":
+        m = re.search(r"NEDERLAND_STEDEN\s*=\s*\[(.*?)\]", tekst, re.DOTALL)
+        slugs = re.findall(r'"([^"]+)"', m.group(1)) if m else []
+        for s in slugs:
+            naam = s.replace("-", " ").title()
+            resultaat.append((s, naam, FOTOS_MAP / "nederland" / s))
+
+    elif soort == "europa":
+        # steden onder elk land + landen-zonder-steden
+        m = re.search(r"EUROPA_LANDEN\s*=\s*\{(.*?)\n\}", tekst, re.DOTALL)
+        blok = m.group(1) if m else ""
+        for lm in re.finditer(r'"([^"]+)"\s*:\s*\[(.*?)\]', blok, re.DOTALL):
+            land = lm.group(1)
+            steden = re.findall(r'"([^"]+)"', lm.group(2))
+            if steden:
+                for st in steden:
+                    naam = st.replace("-", " ").title()
+                    resultaat.append((st, f"{naam} ({land.title()})",
+                                      FOTOS_MAP / "europa" / land / st))
+            else:
+                # land zonder steden: foto's staan direct op landniveau
+                resultaat.append((land, land.title(),
+                                  FOTOS_MAP / "europa" / land))
+
+    elif soort == "fabrikant":
+        # mooie namen uit fabrikanten.html
+        fab = WEBSITE_MAP / "fabrikanten.html"
+        ftekst = fab.read_text(encoding="utf-8") if fab.exists() else ""
+        for fm in re.finditer(
+                r'fabrikanten/([^"]+)\.html" class="manufacturer-item">'
+                r'<span class="manufacturer-name">([^<]+)</span>', ftekst):
+            slug, naam = fm.group(1), fm.group(2)
+            submap = "fabrikanten-a-m" if slug[0] <= "m" else "fabrikanten-n-z"
+            resultaat.append((slug, naam, FOTOS_MAP / submap / slug))
+
+    return resultaat
+
+
+def kies_bestaande_locatie(soort):
+    """Laat de gebruiker een bestaande locatie kiezen via typen-met-herkenning.
+    Eén match -> bevestigen; meerdere -> genummerde lijst; geen -> opnieuw.
+    Geeft (slug, naam, fotomap_pad) terug, of None bij afbreken."""
+    locaties = lees_bestaande_locaties(soort)
+    if not locaties:
+        print("   ⚠️  Geen bestaande locaties gevonden.")
+        return None
+
+    while True:
+        zoek = vraag("\nTyp (een deel van) de naam (of 'lijst' voor alles, 'stop' om te annuleren): ").lower()
+        if zoek == "stop":
+            return None
+        if zoek == "lijst":
+            treffers = locaties
+        else:
+            # match op slug én weergavenaam
+            treffers = [loc for loc in locaties
+                        if zoek in loc[0].lower() or zoek in loc[1].lower()]
+
+        if not treffers:
+            print(f"   Geen match voor '{zoek}'. Probeer opnieuw of typ 'lijst'.")
+            continue
+
+        if len(treffers) == 1:
+            slug, naam, pad = treffers[0]
+            ja = vraag(f"   Bedoel je '{naam}'? (ja/nee): ", toegestaan={"ja","nee"})
+            if ja == "ja":
+                return treffers[0]
+            continue
+
+        # meerdere treffers -> genummerde lijst
+        print(f"\n   {len(treffers)} matches:")
+        for i, (slug, naam, pad) in enumerate(treffers, 1):
+            print(f"     {i}) {naam}")
+        keuze = vraag("   Kies een nummer (of 'terug' om opnieuw te zoeken): ")
+        if keuze == "terug":
+            continue
+        if keuze.isdigit() and 1 <= int(keuze) <= len(treffers):
+            return treffers[int(keuze) - 1]
+        print("   Ongeldige keuze.")
+
+
+def flow_foto_toevoegen():
+    """Voeg foto's toe aan een BESTAANDE locatie (stad, land of fabrikant).
+    Vindt de bestaande map, jij zet foto's erin, en werkt alleen de tellers bij.
+    Maakt GEEN nieuwe pagina en GEEN nieuw lijst-item (geen duplicaat-risico)."""
+    print("\nAan welk type locatie wil je foto's toevoegen?")
+    print("  1) Stad in Nederland")
+    print("  2) Land of stad in Europa")
+    print("  3) Fabrikant")
+    t = vraag("Keuze (1/2/3): ", toegestaan={"1","2","3"})
+    soort = {"1":"nederland","2":"europa","3":"fabrikant"}[t]
+
+    keuze = kies_bestaande_locatie(soort)
+    if keuze is None:
+        print("   Geannuleerd.")
+        return
+    slug, naam, fotomap = keuze
+
+    if not fotomap.exists():
+        print(f"   ⚠️  Fotomap bestaat niet: {fotomap}")
+        print("      Dit kan wijzen op een naam-mismatch. Afgebroken (niets gewijzigd).")
+        return
+
+    print(f"\n   Locatie: {naam}")
+    print(f"   Bestaande fotomap: {fotomap}")
+    wacht_op_fotos(fotomap)
+    # Alleen de tellers/fotolijsten bijwerken — geen pagina's, geen lijst-items.
+    draai_script("maak_fotolijsten.py")
+    print(f"\n   ✅ Foto's toegevoegd aan {naam} en tellers bijgewerkt.")
+
+
 def main():
     print("=" * 55)
     print("  STREETSTEEL — NIEUWE LOCATIE TOEVOEGEN")
@@ -544,18 +662,21 @@ def main():
         input("Druk op Enter om af te sluiten...")
         return
 
-    print("\nWat wil je toevoegen?")
-    print("  1) Stad in Nederland")
-    print("  2) Land of stad in Europa")
-    print("  3) Fabrikant")
-    keuze = vraag("Keuze (1/2/3): ", toegestaan={"1","2","3"})
+    print("\nWat wil je doen?")
+    print("  1) NIEUWE stad in Nederland")
+    print("  2) NIEUW land of stad in Europa")
+    print("  3) NIEUWE fabrikant")
+    print("  4) Foto's toevoegen aan een BESTAANDE locatie")
+    keuze = vraag("Keuze (1/2/3/4): ", toegestaan={"1","2","3","4"})
 
     if keuze == "1":
         flow_nederland_stad()
     elif keuze == "2":
         flow_europa()
-    else:
+    elif keuze == "3":
         flow_fabrikant()
+    else:
+        flow_foto_toevoegen()
 
     print("\n" + "=" * 55)
     print("  KLAAR — lokaal toegevoegd.")
