@@ -35,6 +35,18 @@ PY = sys.executable  # zelfde python-interpreter als waarmee dit draait
 
 # ── KLEINE HULPJES ────────────────────────────────────────────
 
+def iso_naar_vlag(iso2):
+    """Zet een 2-letterige ISO-landcode om naar de vlag-emoji.
+    Een vlag-emoji bestaat uit twee 'regional indicator symbols':
+    elke letter A-Z wordt omgezet naar het bijbehorende symbool (U+1F1E6..U+1F1FF).
+    Bijv. 'be' -> 🇧🇪, 'fr' -> 🇫🇷. Geeft None bij ongeldige invoer."""
+    iso2 = iso2.strip().lower()
+    if len(iso2) != 2 or not iso2.isalpha():
+        return None
+    basis = 0x1F1E6  # regional indicator symbol 'A'
+    return "".join(chr(basis + (ord(c) - ord("a"))) for c in iso2)
+
+
 def vraag(tekst, toegestaan=None, leeg_ok=False):
     """Vraag input, herhaal tot geldig."""
     while True:
@@ -463,8 +475,14 @@ def flow_europa():
     naam = vraag("\nNaam van het land (bijv. Belgie): ")
     land_slug = maak_slug(naam)
     weergavenaam = vraag("Landnaam met juiste spelling (bijv. België): ")
-    vlag = vraag("Vlag-emoji (bijv. 🇧🇪): ")
-    iso2 = maak_slug(vraag("ISO-landcode, 2 letters kleine (bijv. be): ")).replace("-","")
+    while True:
+        iso2 = maak_slug(vraag("ISO-landcode, 2 letters (bijv. be voor België, fr voor Frankrijk): ")).replace("-","")
+        vlag = iso_naar_vlag(iso2)
+        if vlag is None:
+            print("  ⚠️  Voer precies 2 letters in (bijv. be, fr, de).")
+            continue
+        print(f"   Vlag wordt: {vlag}  (uit ISO-code '{iso2}')")
+        break
     print(f"   URL-naam wordt: {land_slug}")
 
     print("\nHeeft dit land meteen steden, of komen de foto's direct op de landpagina?")

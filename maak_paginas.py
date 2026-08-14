@@ -23,7 +23,9 @@ NEDERLAND_STEDEN = [
 
 EUROPA_LANDEN = {
     "denemarken": ["korsor"],
-    "duitsland": ["bad-neuenahr-ahrweiler", "berlijn", "hohenschwangau", "hohn", "kavelaer", "kiel", "kornau", "leer", "oberhausen", "oldenburg", "riezlern", "weinheim"],
+    "duitsland":  ["bad-neuenahr-ahrweiler", "berlijn", "hohn",
+                   "hohenschwangau", "kavelaer", "kiel", "kornau",
+                   "leer", "oberhausen", "oldenburg", "riezlern"],
     "frankrijk":  [],
     "hongarije":  ["boedapest"],
     "italie":     ["como", "sicilie"],
@@ -148,7 +150,7 @@ def stad_template_nl(stad_naam, fotos_pad, css_pad, js_pad):
         <div class="page-meta">
             <div class="page-meta-item"><span>🇳🇱</span><span data-i18n="country.nl">Nederland</span></div>
             <div class="page-meta-item">
-                <strong class="photo-count-live"></strong>&nbsp;<span data-i18n="page.photos">foto's op deze pagina</span>
+                <strong class="photo-count-live"></strong>&nbsp;<span data-i18n="page.photos">op deze pagina</span>
             </div>
         </div>
     </div>
@@ -269,7 +271,7 @@ def europa_stad_template(land, stad, fotos_pad, css_pad, js_pad):
         <div class="page-meta">
             <div class="page-meta-item"><span>{vlag}</span><span data-i18n="{i18n_key}">{land_naam}</span></div>
             <div class="page-meta-item">
-                <strong class="photo-count-live"></strong>&nbsp;<span data-i18n="page.photos">foto's op deze pagina</span>
+                <strong class="photo-count-live"></strong>&nbsp;<span data-i18n="page.photos">op deze pagina</span>
             </div>
         </div>
     </div>
@@ -387,7 +389,7 @@ def fabrikant_template(fab_naam, css_pad, js_pad):
         <div class="page-meta">
             <div class="page-meta-item"><span>🏭</span><span>Fabrikant</span></div>
             <div class="page-meta-item">
-                <strong class="photo-count-live"></strong>&nbsp;<span data-i18n="page.photos">foto's op deze pagina</span>
+                <strong class="photo-count-live"></strong>&nbsp;<span data-i18n="page.photos">op deze pagina</span>
             </div>
         </div>
     </div>

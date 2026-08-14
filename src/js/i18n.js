@@ -62,7 +62,7 @@ const TRANSLATIONS = {
         "lang.switch.btn.nl":       "Nederlands",
         "lang.switch.btn.en":       "Engels",
         "manufacturer.website":     "Website fabrikant →",
-        "page.photos":              "foto's op deze pagina",
+        "page.photos":              "op deze pagina",
     },
 
     en: {
@@ -122,7 +122,7 @@ const TRANSLATIONS = {
         "lang.switch.btn.nl":       "Dutch",
         "lang.switch.btn.en":       "English",
         "manufacturer.website":     "Manufacturer website →",
-        "page.photos":              "photos on this page",
+        "page.photos":              "on this page",
     },
 
     fr: {
@@ -168,7 +168,7 @@ const TRANSLATIONS = {
         "lang.switch.btn.nl":       "Néerlandais",
         "lang.switch.btn.en":       "Anglais",
         "manufacturer.website":     "Site du fabricant →",
-        "page.photos":              "photos sur cette page",
+        "page.photos":              "sur cette page",
     },
 
     de: {
@@ -214,7 +214,7 @@ const TRANSLATIONS = {
         "lang.switch.btn.nl":       "Niederländisch",
         "lang.switch.btn.en":       "Englisch",
         "manufacturer.website":     "Hersteller-Website →",
-        "page.photos":              "Fotos auf dieser Seite",
+        "page.photos":              "auf dieser Seite",
     },
 
     no: {
@@ -260,7 +260,7 @@ const TRANSLATIONS = {
         "lang.switch.btn.nl":       "Nederlandsk",
         "lang.switch.btn.en":       "Engelsk",
         "manufacturer.website":     "Produsentens nettsted →",
-        "page.photos":              "bilder på denne siden",
+        "page.photos":              "på denne siden",
     }
 
     // Overige talen (da, sv, it, es, hu, pt, hr, sk, sq, mk)
