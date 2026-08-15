@@ -101,6 +101,22 @@ function initLightbox() {
         if (e.key === "ArrowLeft")   navigateLightbox(-1);
         if (e.key === "ArrowRight")  navigateLightbox(1);
     });
+
+    // Swipe navigatie (mobiel)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    lb.addEventListener("touchstart", e => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    lb.addEventListener("touchend", e => {
+        const dx = e.changedTouches[0].screenX - touchStartX;
+        const dy = e.changedTouches[0].screenY - touchStartY;
+        // Alleen een duidelijke horizontale veeg telt (niet een verticale scroll)
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+            navigateLightbox(dx < 0 ? 1 : -1);
+        }
+    }, { passive: true });
 }
 
 function openLightbox(index) {
