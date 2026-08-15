@@ -3,63 +3,6 @@
  * Navigatie, fototeller, lightbox, galerij
  */
 
-// ── FOTO TELLER DATA ──────────────────────────────────────────
-// Wordt automatisch bijgewerkt via het beheerpaneel
-const PHOTO_COUNTS = {
-    "nederland/amsterdam":                    0,
-    "nederland/apeldoorn":                    0,
-    "nederland/delfzijl":                     0,
-    "nederland/eindhoven":                    0,
-    "nederland/emmen":                        0,
-    "nederland/groningen":                    0,
-    "nederland/harderwijk":                   0,
-    "nederland/helmond":                      0,
-    "nederland/hoogezand":                    0,
-    "nederland/lelystad":                     0,
-    "nederland/veendam":                      0,
-    "nederland/winschoten":                   0,
-    "europa/denemarken/korsor":               0,
-    "europa/duitsland/bad-neuenahr-ahrweiler":0,
-    "europa/duitsland/berlijn":               0,
-    "europa/duitsland/hohn":                  0,
-    "europa/duitsland/hohenschwangau":        0,
-    "europa/duitsland/kavelaer":              0,
-    "europa/duitsland/kiel":                  0,
-    "europa/duitsland/kornau":                0,
-    "europa/duitsland/leer":                  0,
-    "europa/duitsland/oberhausen":            0,
-    "europa/duitsland/oldenburg":             0,
-    "europa/duitsland/riezlern":              0,
-    "europa/hongarije/boedapest":             0,
-    "europa/italie/como":                     0,
-    "europa/italie/sicilie":                  0,
-    "europa/kosovo":                          0,
-    "europa/kroatie":                         0,
-    "europa/macedonie":                       0,
-    "europa/noorwegen/bearums-verk":          0,
-    "europa/noorwegen/bergen":                0,
-    "europa/noorwegen/flaam":                 0,
-    "europa/noorwegen/honningsvaag":          0,
-    "europa/noorwegen/kristiansand":          0,
-    "europa/noorwegen/molde":                 0,
-    "europa/noorwegen/olden":                 0,
-    "europa/noorwegen/oslo":                  0,
-    "europa/noorwegen/stavanger":             0,
-    "europa/noorwegen/tromsoe":               0,
-    "europa/frankrijk":                       0,
-    "europa/oostenrijk":                      0,
-    "europa/portugal":                        0,
-    "europa/schotland":                       0,
-    "europa/slowakije/bratislava":            0,
-    "europa/spanje/cordoba":                  0,
-    "europa/spanje/granada":                  0,
-    "europa/spanje/nerja":                    0,
-    "europa/spanje/udeba":                    0,
-    "europa/zweden/goeteborg":                0,
-    "europa/zweden/malmoe":                   0,
-    "europa/zweden/nordby":                   0,
-};
-
 // ── NAVIGATIE ─────────────────────────────────────────────────
 function initNav() {
     const toggle = document.getElementById("menuToggle");
@@ -108,18 +51,6 @@ function initPhotoCounts() {
         const titleCount = document.querySelector(".page-count");
         if (titleCount) titleCount.textContent = count;
     }
-
-    // Op overzichtspagina's: toon tellers uit PHOTO_COUNTS data
-    document.querySelectorAll(".photo-count[data-page]").forEach(el => {
-        const page = el.getAttribute("data-page");
-        const count = PHOTO_COUNTS[page];
-        if (count !== undefined) {
-            const label = count === 1
-                ? `1 ${I18n.t("photos.count.singular")}`
-                : `${count} ${I18n.t("photos.count")}`;
-            el.textContent = label;
-        }
-    });
 }
 
 // ── LIGHTBOX ──────────────────────────────────────────────────

@@ -16,9 +16,9 @@
     --clr-text-muted:  #888880;
     --clr-text-faint:  #555550;
 
-    --clr-accent:      #c8892a;      /* roestoranje — industrieel staal */
-    --clr-accent-dim:  #8a5e1a;
-    --clr-accent-glow: rgba(200,137,42,0.15);
+	--clr-accent:      #5f7d9a;      /* staalblauw — industrieel metaal */
+    --clr-accent-dim:  #3d5670;
+    --clr-accent-glow: rgba(95,125,154,0.15);
 
     --clr-steel:       #4a6fa5;      /* staalblauwe accent */
     --clr-paypal:      #003087;
@@ -280,7 +280,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(200,137,42,0.08) 0%, transparent 60%),
+radial-gradient(ellipse 80% 60% at 60% 40%, rgba(95,125,154,0.08) 0%, transparent 60%),
         radial-gradient(ellipse 60% 80% at 20% 80%, rgba(74,111,165,0.06) 0%, transparent 50%),
         linear-gradient(180deg, #0e0e0e 0%, #111111 100%);
 }
