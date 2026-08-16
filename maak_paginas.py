@@ -332,6 +332,148 @@ def europa_stad_template(land, stad, fotos_pad, css_pad, js_pad):
 </html>'''
 
 
+def europa_land_met_steden_template(land, steden, css_pad, js_pad):
+    """HTML template voor een Europees LAND met een of meer steden: toont stad-tegels."""
+    land_naam = LAND_NAMEN.get(land, land.title())
+    vlag      = LAND_VLAGGEN.get(land, "\U0001F30D")
+    i18n_key  = LAND_I18N.get(land, "nav.europe")
+    n = len(steden)
+    stad_woord = "stad" if n == 1 else "steden"
+
+    tegels = ""
+    for stad in steden:
+        stad_titel = stad.replace("-", " ").title()
+        tegels += f'''
+            <a href="/europa/{land}/{stad}.html" class="location-card">
+                <div class="card-img-placeholder">
+                    <span class="card-flag">{vlag}</span>
+                </div>
+                <div class="card-body">
+                    <span class="card-country" data-i18n="{i18n_key}">{land_naam}</span>
+                    <h3 class="card-city">{stad_titel}</h3>
+                    <span class="card-count photo-count" data-page="europa/{land}/{stad}"></span>
+                </div>
+            </a>'''
+
+    return f'''<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="page-country" content="{land}">
+    <title>{land_naam} \u2014 StreetSteel</title>
+    <meta name="description" content="Putdeksels gefotografeerd in {land_naam}.">
+    <link rel="stylesheet" href="{css_pad}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-inner">
+        <a href="../../index.html" class="logo">
+            <span class="logo-icon">\u2B21</span>
+            <div class="logo-text">
+                <span class="logo-main">STREET</span><span class="logo-accent">STEEL</span>
+                <span class="logo-sub">.EU</span>
+            </div>
+        </a>
+        <nav class="main-nav">
+            <a href="../../index.html" class="nav-link">Home</a>
+            <a href="../../nederland.html" class="nav-link">Nederland</a>
+            <a href="../../europa.html" class="nav-link active">Europa</a>
+            <a href="../../fabrikanten.html" class="nav-link">Fabrikanten</a>
+            <a href="../../over.html" class="nav-link">Over</a>
+        </nav>
+        <div class="header-right">
+            <div class="lang-switcher" id="langSwitcher"></div>
+            <button class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></button>
+        </div>
+    </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../nederland.html">Nederland</a>
+        <a href="../../europa.html">Europa</a>
+        <a href="../../fabrikanten.html">Fabrikanten</a>
+        <a href="../../over.html">Over</a>
+    </nav>
+</div>
+
+<div class="page-hero">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span>\u203A</span>
+            <a href="../../europa.html">Europa</a>
+            <span>\u203A</span>
+            {land_naam}
+        </div>
+        <h1 class="page-title">{land_naam}</h1>
+        <div class="page-meta">
+            <div class="page-meta-item">
+                <span>{vlag}</span>
+                <span data-i18n="{i18n_key}">{land_naam}</span>
+            </div>
+            <div class="page-meta-item">
+                <span>{n} {stad_woord}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="cards-grid">
+            {tegels}
+        </div>
+    </div>
+</section>
+
+<div class="floating-support" id="floatingSupport">
+    <a href="https://paypal.me/gradje340" target="_blank" rel="noopener" class="floating-support__btn">
+        \u2665 <span data-i18n="support.floating">Steun</span>
+    </a>
+</div>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="../../index.html" class="logo">
+                    <span class="logo-icon">\u2B21</span>
+                    <div class="logo-text"><span class="logo-main">STREET</span><span class="logo-accent">STEEL</span></div>
+                </a>
+                <p data-i18n="footer.tagline">Putdeksels van de wereld.</p>
+            </div>
+            <div class="footer-nav">
+                <h4>Locaties</h4>
+                <a href="../../nederland.html">Nederland</a>
+                <a href="../../europa.html">Europa</a>
+            </div>
+            <div class="footer-nav">
+                <h4>Fabrikanten</h4>
+                <a href="../../fabrikanten.html">Alle fabrikanten A-Z</a>
+            </div>
+            <div class="footer-nav">
+                <h4>Meer</h4>
+                <a href="../../over.html">Over dit project</a>
+                <a href="https://paypal.me/gradje340" target="_blank">Steun de maker</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>\u00A9 2021\u20132026 StreetSteel.eu</p>
+            <p data-i18n="footer.rights">Alle foto\u0027s zijn eigendom van de maker.</p>
+        </div>
+    </div>
+</footer>
+<script src="../../src/js/i18n.js"></script>
+<script src="../../src/js/main.js"></script>
+<script src="../../src/js/fotos.js"></script>
+</body>
+</html>'''
+
+
 def fabrikant_template(fab_naam, css_pad, js_pad):
     """HTML template voor een fabrikant."""
     fab_titel = fab_naam.replace("-", " ").title()
@@ -497,11 +639,14 @@ def main():
         land_map = europa_map / land
         land_map.mkdir(exist_ok=True)
 
-        # Landpagina
+        # Landpagina: met steden -> tegel-layout; zonder steden -> fotogalerij
         land_pad = europa_map / f"{land}.html"
         if not land_pad.exists():
-            fotos_pad = f"fotos/europa/{land}"
-            html = europa_stad_template(land, "", fotos_pad, "../../src/css/main.css", "../../src/js/main.js")
+            if steden:
+                html = europa_land_met_steden_template(land, steden, "../../src/css/main.css", "../../src/js/main.js")
+            else:
+                fotos_pad = f"fotos/europa/{land}"
+                html = europa_stad_template(land, "", fotos_pad, "../../src/css/main.css", "../../src/js/main.js")
             land_pad.write_text(html, encoding="utf-8")
             aangemaakt += 1
             print(f"  ✅ europa/{land}.html")
