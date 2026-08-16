@@ -41,6 +41,8 @@ EUROPA_LANDEN = {
     "slowakije":  ["bratislava"],
     "spanje":     ["cordoba", "granada", "nerja", "udeba"],
     "zweden":     ["goeteborg", "malmoe", "nordby"],
+    "belgie": ["maaseik"],
+
 }
 
 LAND_VLAGGEN = {
@@ -49,6 +51,7 @@ LAND_VLAGGEN = {
     "kroatie":    "🇭🇷", "macedonie": "🇲🇰", "noorwegen": "🇳🇴",
     "oostenrijk": "🇦🇹", "portugal":  "🇵🇹", "schotland": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
     "slowakije":  "🇸🇰", "spanje":    "🇪🇸", "zweden":    "🇸🇪",
+    "belgie": "🇧🇪",
 }
 
 LAND_NAMEN = {
@@ -60,6 +63,7 @@ LAND_NAMEN = {
     "portugal":   "Portugal",   "schotland": "Schotland",
     "slowakije":  "Slowakije",  "spanje":    "Spanje",
     "zweden":     "Zweden",
+    "belgie": "België",
 }
 
 LAND_I18N = {
@@ -71,6 +75,7 @@ LAND_I18N = {
     "portugal":   "country.pt", "schotland": "country.gb",
     "slowakije":  "country.sk", "spanje":    "country.es",
     "zweden":     "country.se",
+    "belgie": "country.be",
 }
 
 FABRIKANTEN = [

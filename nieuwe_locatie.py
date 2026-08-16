@@ -513,11 +513,11 @@ def flow_europa():
         voeg_europa_toe_aan_generator(land_slug, stad_slugs, nieuw_land=True,
                                       naam=weergavenaam, vlag=vlag, iso2=iso2)
         keten_draaien()
-        # kaartjes voor elke stad
-        for sslug, slabel in stad_info:
-            kaart = kaartje_html(f"europa/{land_slug}/{sslug}.html", weergavenaam, vlag,
-                                 slabel, f"europa/{land_slug}/{sslug}")
-            voeg_kaartje_in("europa.html", kaart, f"europa/{land_slug}/{sslug}.html")
+        # EEN landkaart op europa.html (net als een land-zonder-steden). De steden
+        # verschijnen als tegels op de landpagina zelf, niet los op het overzicht.
+        kaart = kaartje_html(f"europa/{land_slug}.html", "Europa", vlag,
+                             weergavenaam, f"europa/{land_slug}")
+        voeg_kaartje_in("europa.html", kaart, f"europa/{land_slug}.html")
 
 
 def flow_fabrikant():
