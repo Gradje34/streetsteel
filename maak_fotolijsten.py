@@ -153,10 +153,15 @@ def main():
     schrijf_json(DATA_MAP / "tellers.json", alle_tellers)
     print(f"\n✅ Tellers overzicht: data/tellers.json")
 
-    # Werk het fallback-getal in de homepage-hero bij
-    totaal_fotos = sum(alle_tellers.values())
+    # Werk het fallback-getal in de homepage-hero bij.
+    # Let op: telt bewust alleen nederland/europa (unieke foto's). Foto's
+    # onder fabrikanten/ zijn dezelfde foto's nogmaals gecategoriseerd per
+    # fabrikant, dus die NIET meetellen — anders telt elke foto dubbel.
+    totaal_fotos = sum(
+        v for k, v in alle_tellers.items() if not k.startswith("fabrikanten/")
+    )
     werk_hero_fallback_bij(totaal_fotos)
-    print(f"\n📸 Totaal aantal foto's: {totaal_fotos}")
+    print(f"\n📸 Totaal aantal unieke foto's (excl. fabrikant-duplicaten): {totaal_fotos}")
 
     # ── EINDRAPPORT ──────────────────────────────────────────
     print(f"\n{'=' * 55}")
