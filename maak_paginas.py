@@ -82,15 +82,16 @@ FABRIKANTEN = [
     "alphacan", "aqauway", "aquafix", "aquagate", "avk",
     "b-oz", "de-globe", "de-leidinggroothandel", "delta-plast", "dijg",
     "draka-polva", "dyka", "ewe", "fibrelita", "fmh-pompservice",
-    "frelu", "friand", "geertsema", "hauraton", "hermelock",
-    "joosten", "kamphuis", "kb", "kessel", "ksk",
-    "landustrie", "lhs", "lovink", "martens", "meijer",
-    "mij-onbekende-producent-en", "milder", "mous", "natuurbeton-milieu", "neering-bogel",
-    "nki", "norinco", "nyloplast", "oogink", "p-konings",
-    "pam", "passevant", "pipelife", "poly", "samson",
-    "sotra", "stora", "stradus", "strucom", "tbs",
-    "thijssen", "topatec", "van-der-velden", "veko", "vulcanus",
-    "w-ten-cate", "waprog", "waterleiding-mij-prov-groningen", "wavin", "weegels"
+    "frelu", "friand", "geertsema", "globe", "hauraton",
+    "hermelock", "joosten", "kamphuis", "kb", "kessel",
+    "ksk", "landustrie", "lhs", "lovink", "martens",
+    "meijer", "mij-onbekende-producent-en", "milder", "mous", "natuurbeton-milieu",
+    "neering-bogel", "nki", "norinco", "nyloplast", "oogink",
+    "p-konings", "pam", "passevant", "pipelife", "poly",
+    "samson", "sotra", "stora", "stradus", "strucom",
+    "tbs", "thijssen", "topatec", "van-der-velden", "veko",
+    "vulcanus", "w-ten-cate", "waprog", "waterleiding-mij-prov-groningen", "wavin",
+    "weegels"
 ]
 
 # ── TEMPLATES ─────────────────────────────────────────────────
