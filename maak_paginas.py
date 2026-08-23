@@ -41,7 +41,7 @@ EUROPA_LANDEN = {
     "slowakije":  ["bratislava"],
     "spanje":     ["cordoba", "granada", "nerja", "udeba"],
     "zweden":     ["goeteborg", "malmoe", "nordby"],
-    "belgie": ["maaseik"],
+    "belgie": ["kinrooi", "maaseik"],
 
 }
 
