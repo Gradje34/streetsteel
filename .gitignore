@@ -1,3 +1,7 @@
 *.bak
 
 __pycache__/
+
+# .py-scripts horen alleen nog in C:\Streetsteel-uit-GIT-Bestanden-houden\_SCRIPTS
+# te staan, niet in deze git-repo (25 aug 2026)
+*.py
